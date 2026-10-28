@@ -1,0 +1,51 @@
+import {startPreview} from './browser-preview.mjs';
+const preview=await startPreview();
+import {navigate} from './browser-navigation.mjs';
+import {createRequire} from 'node:module';
+import {readFile,writeFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const require=createRequire('C:/Users/53671/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/package.json');
+const {chromium}=require('playwright');
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+const checks=[],errors=[],url=preview.url;
+try{
+const ctx=await browser.newContext({viewport:{width:1600,height:1100}}),p=await ctx.newPage();
+p.on('pageerror',e=>errors.push(e.message));
+const click=(a,id)=>p.locator(`[data-action="${a}"]${id?`[data-id="${id}"]`:''}`).first().click();
+const role=async(r,id)=>{await p.locator('#role').selectOption(r);if(id&&r!=='ceo')await p.locator('#person').selectOption(id)};
+const nav=async k=>{await navigate(p,'oa');await p.locator('[data-action="admin"][data-op="tab"][data-id="collaboration"]').first().click();await click('oa-tab',k)};
+const edit=async(k)=>p.locator(`[data-action="oa-open"][data-kind="${k}"][data-id=""]`).first().click();
+const detail=async(k,id)=>{await nav(k);await p.locator(`[data-action="oa-open"][data-kind="${k}"][data-id="${id}"]`).click()};
+const command=async op=>p.locator(`#modal [data-action="oa-command"][data-op="${op}"]`).click();
+const fill=async values=>{for(const [k,v]of Object.entries(values))await p.locator(`#modal [name="${k}"]`).fill(v)};
+const save=async()=>{await p.locator('#saveBtn').click();assert.equal(await p.locator('#formError').innerText(),'');assert.equal(await p.locator('#modal').evaluate(e=>e.open),false)};
+const data=()=>p.evaluate(()=>JSON.parse(localStorage.getItem('gaoyue-ceo-workbench-v1')).data);
+await p.goto(url);await p.getByRole('heading',{name:'今天，把关键事项推进一步。'}).waitFor();for(const summary of await p.locator('#content>details.ops-expand>summary').all())await summary.click();
+assert.equal(await p.locator('.oa-executive').count(),1);await nav('home');assert.equal(await p.locator('[role="tab"]').count(),6);checks.push('CEO总览办公入口与六个模块可用');
+await role('operator','chen');await nav('requests');await edit('requests');
+await fill({title:'浏览器采购申请',body:'补充备选方案 <img src=x onerror=alert(1)>',due:'2026-10-20',amount:'300'});
+await p.locator('[name="category"]').selectOption('采购');await p.locator('[name="first"]').selectOption('lin');await p.locator('[name="second"]').selectOption('ceo');await save();
+let d=await data(),req=d.oa.requests.find(r=>r.title==='浏览器采购申请');assert.ok(req);
+await role('manager','lin');await navigate(p,'approvals');await p.locator(`[data-action="oa-open"][data-id="${req.id}"]`).click();assert.equal(await p.locator('#modal img').count(),0);await command('decide');await fill({note:'报价可比，转 CEO'});await save();
+await role('ceo');await p.locator(`[data-action="oa-open"][data-id="${req.id}"]`).click();await command('decide');await fill({note:'同意本次申请'});await save();assert.equal((await data()).oa.requests.find(r=>r.id===req.id).status,'approved');checks.push('运营成员申请→负责人审批→CEO审批，统一中心可处理且文本安全转义');
+await role('manager','lin');await nav('meetings');await edit('meetings');await fill({title:'浏览器经营周会',body:'备选方案决策',due:'2026-10-15',time:'14:30'});await p.locator('[name="attendees"]').selectOption(['lin','chen']);await save();
+d=await data();const meeting=d.oa.meetings.find(r=>r.title==='浏览器经营周会');await detail('meetings',meeting.id);await command('minutes');await fill({note:'优先整理可替代供应商'});await save();await detail('meetings',meeting.id);await command('action');await fill({title:'浏览器会议行动',body:'两家供应商对比表',criteria:'含价格交期和风险',due:'2026-10-20'});await p.locator('[name="milestone"]').selectOption('m3');await p.locator('[name="owner"]').selectOption('chen');await save();
+d=await data();const task=d.tasks.find(t=>t.name==='浏览器会议行动');assert.ok(d.oa.meetings.find(r=>r.id===meeting.id).tasks.includes(task.id));await detail('meetings',meeting.id);await p.locator(`#modal [data-action="task"][data-id="${task.id}"]`).click();assert.equal(await p.locator('#modalTitle').innerText(),'浏览器会议行动');await p.locator('#closeModal').click();checks.push('会议纪要与决议生成既有项目任务，并可打开原任务操作');
+await role('operator','chen');await nav('reports');await edit('reports');await fill({title:'浏览器采购周报',body:'已经比较供应商报价',blockers:'等待样品',next:'确认交期',due:'2026-10-16'});await p.locator('[name="reviewer"]').selectOption('lin');await save();d=await data();const report=d.oa.reports.find(r=>r.title==='浏览器采购周报');assert.ok(report.snapshot.some(t=>t.id===task.id));await role('manager','lin');await detail('reports',report.id);await command('comment');await fill({note:'先完成样品评估'});await save();checks.push('汇报保存任务快照且负责人能填写点评');
+await nav('collabs');await edit('collabs');await fill({title:'浏览器预算协作',body:'请财务核对预算边界',due:'2026-10-20'});await p.locator('[name="owner"]').selectOption('qian');await save();d=await data();const collab=d.oa.collabs.find(r=>r.title==='浏览器预算协作');await role('manager','qian');await detail('collabs',collab.id);await command('accept');await fill({note:'已接单'});await save();await detail('collabs',collab.id);await command('deliver');await fill({note:'核对结果：预算范围内'});await save();await role('manager','lin');await detail('collabs',collab.id);await command('confirm');await fill({note:'结果符合要求'});await save();assert.equal((await data()).oa.collabs.find(r=>r.id===collab.id).status,'done');checks.push('跨部门接单→反馈→发起人确认完成');
+await role('ceo');await nav('notices');await edit('notices');await fill({title:'浏览器公告',body:'周报提交安排',due:'2026-10-20'});await p.locator('[name="audience"]').selectOption(['chen']);await save();d=await data();const notice=d.oa.notices.find(r=>r.title==='浏览器公告');await role('operator','chen');await detail('notices',notice.id);await command('ack');assert.equal(await p.locator('#modal').evaluate(e=>e.open),false);await role('ceo');await detail('notices',notice.id);await command('edit');await fill({body:'更新为新的周报安排'});await save();d=await data();assert.equal(d.oa.notices.find(r=>r.id===notice.id).version,2);assert.equal(d.oa.notices.find(r=>r.id===notice.id).reads.length,0);checks.push('指定公告阅读确认与版本更新重新确认');
+await p.reload();d=await data();assert.equal(d.oa.requests.find(r=>r.id===req.id).status,'approved');checks.push('OA数据在页面刷新后保留');
+await role('ceo');const downloadPromise=p.waitForEvent('download');await click('export');const download=await downloadPromise;const backup=JSON.parse(await readFile(await download.path(),'utf8'));assert.equal(backup.data.oaVersion,1);assert.ok(backup.data.oa.collabs.find(r=>r.id===collab.id));checks.push('完整备份包含OA、审批记录与关联任务');
+const popupPromise=p.waitForEvent('popup');await nav('home');await p.locator('[data-action="new-window"][data-id="oa"]').click();const popup=await popupPromise;await popup.waitForLoadState();assert.equal(await popup.locator('#crumb').innerText(),'组织与资源 / 行政事务工具清单');await popup.close();checks.push('OA独立窗口直接进入办公首页');
+await nav('requests');await p.locator('#oaSearch').fill('浏览器采购申请');await p.locator('#oaSearch').dispatchEvent('change');assert.equal(await p.locator('.oa-card').count(),1);checks.push('办公记录可按关键词搜索');
+await role('operator','chen');await nav('meetings');assert.equal(await p.locator('[data-action="oa-open"][data-id=""]').count(),0);await nav('notices');assert.equal(await p.locator('[data-action="oa-open"][data-id=""]').count(),0);checks.push('运营成员没有会议安排及公告发布入口');
+await role('operator','chen');d=await data();const planned=d.oa.meetings.find(r=>r.status==='scheduled');await detail('meetings',planned.id);await command('agenda');await fill({note:'浏览器补充议题：交期风险'});await save();assert.equal((await data()).oa.meetings.find(r=>r.id===planned.id).agenda.length,1);checks.push('参会成员在浏览器中补充会前议题');
+const blocked=(await data()).oa.collabs.find(r=>r.owner==='chen'&&r.status==='pending');await detail('collabs',blocked.id);await command('escalate');await fill({note:'需要CEO协调资源支持'});await save();d=await data();const escalation=d.oa.collabs.find(r=>r.id===blocked.id).escalation;await role('ceo');await navigate(p,'approvals');await p.locator(`[data-action="oa-open"][data-id="${escalation}"]`).click();await command('decide');await fill({note:'同意协调资源，按原流程继续推进'});await save();checks.push('协作升级生成CEO审批，统一中心可处理');
+await role('ceo');await nav('home');await p.locator('.oa-workload summary').click();await p.locator('#toast').evaluate(e=>e.classList.remove('show'));await p.screenshot({path:new URL('./preview-oa-office.png',import.meta.url).pathname.replace(/^\/([A-Za-z]:)/,'$1'),fullPage:true});
+await p.setViewportSize({width:390,height:844});for(const k of ['home','requests','meetings','reports','collabs','notices']){await nav(k);assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),k+' overflow')}checks.push('六个OA页面在手机宽度下无整页横向溢出');
+// Load a genuine pre-OA saved payload in a separate isolated browser context.
+const ctx2=await browser.newContext(),p2=await ctx2.newPage();p2.on('pageerror',e=>errors.push(e.message));await p2.goto(url);const legacy=structuredClone(backup);delete legacy.data.oa;delete legacy.data.oaVersion;legacy.data.projects[0].goal='旧版用户战略，必须保留';await p2.evaluate(v=>localStorage.setItem('gaoyue-ceo-workbench-v1',JSON.stringify(v)),legacy);await p2.reload();const migrated=await p2.evaluate(()=>JSON.parse(localStorage.getItem('gaoyue-ceo-workbench-v1')));assert.equal(migrated.data.projects[0].goal,'旧版用户战略，必须保留');assert.equal(migrated.data.oaVersion,1);checks.push('真实浏览器旧版本保存数据自动迁移且原战略保留');
+assert.deepEqual(errors,[]);checks.push('全部页面无JavaScript运行错误');
+await writeFile(new URL('./validation-oa-browser.json',import.meta.url),JSON.stringify({passed:checks.length,checks},null,2));console.log(JSON.stringify({passed:checks.length,checks},null,2));
+}finally{await browser.close();await preview.close()}
+

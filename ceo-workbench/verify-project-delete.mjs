@@ -1,0 +1,12 @@
+import {readFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const source=await readFile(new URL('./index.html',import.meta.url),'utf8');
+const script=source.slice(source.indexOf('<script>')+8,source.lastIndexOf('</script>'));
+const C=new Function(script.slice(0,script.indexOf('function boot()'))+';return Core')();
+const ceo={role:'ceo',person:'ceo'},cmd=(id,name)=>({type:'delete-project',id,confirm:name});
+let n=0;const check=(name,fn)=>{fn();n++;console.log('PASS '+name)};
+check('CEO可删除业务项目和关联数据，保留成员与其他项目',()=>{const d=C.seed(),before=C.clone(d),p=d.projects.find(x=>x.id==='kcg'),ids=C.tasksOf(d,p.id).map(t=>t.id);p.lifecycle='archived';C.change(d,ceo,cmd(p.id,p.name));assert.ok(!d.projects.some(x=>x.id===p.id));assert.ok(!d.stages.some(x=>x.project===p.id));assert.ok(!d.tasks.some(x=>ids.includes(x.id)));for(const k of ['approvals','staffing','finance','reviews'])assert.ok(!d[k].some(x=>x.project===p.id));for(const list of Object.values(d.oa))assert.ok(!list.some(x=>x.project===p.id));assert.equal(d.members.length,before.members.length);assert.ok(d.members.every(m=>!m.projects.includes(p.id)));assert.deepEqual(d.projects.find(x=>x.id==='media'),before.projects.find(x=>x.id==='media'));assert.equal(d.history[0].action,'delete-project');C.validate(d);C.validate(before)});
+check('负责人不能删除，名称不匹配和职能模块删除均被阻止',()=>{const d=C.seed(),before=JSON.stringify(d),p=d.projects[0];assert.throws(()=>C.change(d,{role:'manager',person:'lin'},cmd(p.id,p.name)));assert.throws(()=>C.change(d,ceo,cmd(p.id,'错名')));const hr=d.projects.find(x=>x.id==='hr');assert.throws(()=>C.change(d,ceo,cmd('hr',hr.name)));assert.equal(JSON.stringify(d),before)});
+check('跨项目依赖会阻止删除且不部分清理数据',()=>{const d=C.seed(),p=d.projects.find(x=>x.id==='media'),external=C.tasksOf(d,'kcg').find(t=>t.status==='active');p.lifecycle='archived';external.deps.push(C.tasksOf(d,p.id)[0].id);C.validate(d);const before=JSON.stringify(d);assert.throws(()=>C.change(d,ceo,cmd(p.id,p.name)),/依赖/);assert.equal(JSON.stringify(d),before)});
+check('可删除最后一个业务项目，旧版迁移不会重新添加已删除项目',()=>{const d=C.seed();for(const p of [...d.projects].filter(p=>p.kind!=='function')){d.projects.find(x=>x.id===p.id).lifecycle='archived';C.change(d,ceo,cmd(p.id,p.name));}C.upgrade(d);C.validate(d);assert.equal(d.projects.filter(p=>p.kind!=='function').length,0)});
+console.log(`${n} project deletion checks passed`);

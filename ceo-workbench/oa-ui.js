@@ -1,0 +1,76 @@
+const oaTabs={home:'我的办公',requests:'申请审批',meetings:'会议决议',reports:'工作汇报',collabs:'跨部门协作',notices:'公告制度'};
+const oaStatus={pending:'待处理',approved:'已通过',rejected:'已退回',withdrawn:'已撤回',scheduled:'待开会',completed:'已记录纪要',submitted:'待点评',reviewed:'已点评',accepted:'推进中',review:'待确认',done:'已完成',published:'已发布'};
+let oaTab='home',oaSearch='';
+function oaRows(k){return data.oa[k].filter(r=>C.oaVisible(data,user,k,r))}
+function oaOpen(k,r){return k==='requests'?r.status==='pending':k==='collabs'?r.status!=='done':k==='reports'?r.status==='submitted':k==='meetings'?r.status==='scheduled':r.reads.length<r.audience.length}
+function oaMine(k,r){return k==='requests'?r.status==='pending'&&r.approvers[r.step]===user.person:k==='collabs'?((['pending','accepted'].includes(r.status)&&r.owner===user.person)||(r.status==='review'&&r.author===user.person)):k==='reports'?r.status==='submitted'&&r.reviewer===user.person:k==='notices'?r.audience.includes(user.person)&&!r.reads.some(x=>x.person===user.person):r.status==='scheduled'&&r.attendees.includes(user.person)}
+function oaLink(label,k,id='',cls=''){return button(label,'oa-open',id,`data-kind="${k}"`,cls)}
+function oaPending(){return oaRows('requests').filter(r=>r.status==='pending').length}
+function oaExecutive(){
+const late=['requests','collabs'].flatMap(k=>oaRows(k).filter(r=>oaOpen(k,r)&&r.due<asOf).map(r=>({k,r}))),meetings=oaRows('meetings').filter(r=>r.status==='scheduled'&&r.due>=asOf).sort((a,b)=>a.due.localeCompare(b.due));
+const actionable=['requests','reports','collabs','notices'].reduce((n,k)=>n+oaRows(k).filter(r=>oaMine(k,r)).length,0);
+return `<section class="panel oa-executive"><div class="section-title"><div><div class="eyebrow">OFFICE MANAGEMENT</div><h2>OA 办公管理</h2></div>${button('进入办公中心 ↗','module','oa','','primary')}</div><div class="oa-metrics"><div><strong>${actionable}</strong><span>待我处理</span></div><div><strong>${oaPending()}</strong><span>流转中申请</span></div><div><strong class="${late.length?'red-text':''}">${late.length}</strong><span>逾期申请 / 协作</span></div><div><strong>${meetings.length}</strong><span>待开会议</span></div></div><div class="oa-executive-bottom"><p>${meetings[0]?'下一场：'+esc(meetings[0].due+' '+meetings[0].time+' · '+meetings[0].title):'暂无待开会议'} ${meetings[0]?oaLink('查看','meetings',meetings[0].id,'link'):''}</p><p class="muted">${late.length?'逾期：'+late.slice(0,2).map(x=>esc(x.r.title)).join('；'):'暂无逾期申请或协作'} · 按演示基准日计算</p></div>${user.role==='ceo'?`<details class="oa-workload"><summary>管理层办公待办总览</summary><div class="oa-grid">${data.members.filter(m=>m.level==='manager').map(m=>`<div class="oa-small"><b>${esc(m.name)} · ${esc(m.role)}</b><p>待审批 ${data.oa.requests.filter(r=>r.status==='pending'&&r.approvers[r.step]===m.id).length} · 待点评 ${data.oa.reports.filter(r=>r.status==='submitted'&&r.reviewer===m.id).length} · 待接单 / 推进 ${data.oa.collabs.filter(r=>r.owner===m.id&&['pending','accepted'].includes(r.status)).length}</p></div>`).join('')}</div></details>`:''}</section>`;
+}
+function oaView(){
+return title('OFFICE & COLLABORATION','协作与审批','方案、会议、汇报与评论集中协同。')+`<div class="oa-tabs" role="tablist" aria-label="办公模块">${Object.entries(oaTabs).map(([k,l])=>`<button role="tab" aria-selected="${oaTab===k}" class="${oaTab===k?'primary':''}" data-action="oa-tab" data-id="${k}">${l}${k!=='home'?` <small>${oaRows(k).length}</small>`:''}</button>`).join('')}</div>`+(oaTab==='home'?oaHome():oaList(oaTab));
+}
+function oaHome(){
+const todo=['requests','meetings','reports','collabs','notices'].flatMap(k=>oaRows(k).filter(r=>oaMine(k,r)).map(r=>({k,r}))).sort((a,b)=>a.r.due.localeCompare(b.r.due));
+return oaExecutive()+`<div class="oa-quick">${oaLink('＋ 发起申请','requests')}${oaLink('＋ 提交汇报','reports')}${oaLink('＋ 跨部门协作','collabs')}${user.role!=='operator'?oaLink('＋ 安排会议','meetings')+oaLink('＋ 发布公告 / 制度','notices'):''}</div><section class="panel"><div class="section-title"><h2>我的办公清单</h2><span class="muted">${esc(who(user.person))} · ${todo.length} 项</span></div>${todo.map(({k,r})=>`<div class="oa-todo"><div><b>${esc(r.title)}</b><p class="muted">${oaTabs[k]} · ${esc(projectName(r.project))} · ${esc(r.due)} ${r.due<asOf?'<span class="red-text">已逾期</span>':''}</p></div>${oaLink('查看并处理',k,r.id)}</div>`).join('')||empty('当前没有待我处理的办公事项')}</section><p class="muted">新建的办公事项会保留在本机；站内催办不会发送邮件或消息。身份切换仅用于演示。</p>`;
+}
+function oaList(k){const rows=oaRows(k).filter(r=>!oaSearch||(r.title+' '+r.body+' '+projectName(r.project)+' '+who(r.author)).toLowerCase().includes(oaSearch.toLowerCase()));
+return `<div class="toolbar"><input id="oaSearch" aria-label="搜索办公事项" placeholder="搜索标题、内容、项目或发起人" value="${esc(oaSearch)}"><span class="muted">${rows.length} 条 · 本人参与范围${user.role==='ceo'?' / CEO 全部可见':''}</span>${!['meetings','notices'].includes(k)||user.role!=='operator'?oaLink('＋ '+({requests:'发起申请',meetings:'安排会议',reports:'提交汇报',collabs:'发起协作',notices:'发布公告 / 制度'}[k]),k,'','primary'):''}</div><div class="oa-grid">${rows.map(r=>oaCard(k,r)).join('')||empty('暂无符合条件的记录')}</div>`;
+}
+function oaCard(k,r){const late=oaOpen(k,r)&&r.due<asOf;
+const detail=k==='requests'?`审批流：${r.approvers.map((id,i)=>esc(who(id))+(r.status==='pending'&&i===r.step?'（当前）':'')).join(' → ')} · ${money(r.amount,r.currency)}`:k==='meetings'?`${esc(r.due+' '+r.time)} · ${r.attendees.length} 人 · ${r.tasks.length} 项行动`:k==='reports'?`${esc(r.period)} · 点评人 ${esc(who(r.reviewer))}`:k==='collabs'?`接收人 ${esc(who(r.owner))}`:`${esc(r.category)} v${r.version} · ${r.reads.length}/${r.audience.length} 已读`;
+return `<article class="panel oa-card"><div class="row spread">${badge(oaStatus[r.status],late?'amber':'')}${badge(projectName(r.project),'blue')}</div><h2>${esc(r.title)}</h2><p class="oa-excerpt">${esc(r.body)}</p><p class="muted">${detail}</p><p class="muted">${esc(who(r.author))} · ${k==='notices'?'阅读确认期限':'日期 / 截止'} ${esc(r.due)} ${late?'<span class="red-text">逾期</span>':''}</p><div class="actions">${oaLink(oaMine(k,r)?'查看并处理':'查看详情',k,r.id,oaMine(k,r)?'primary':'')}</div></article>`;
+}
+function oaApprovals(){return `<section class="panel"><div class="section-title"><h2>OA 办公申请</h2>${oaLink('＋ 发起申请','requests')}</div><p class="muted">依次由指定审批人处理；CEO 不跳过当前审批节点。通过申请不代表已付款或已完成项目任务。</p><div class="oa-grid">${oaRows('requests').map(r=>oaCard('requests',r)).join('')||empty('暂无办公申请')}</div></section>`}
+function oaRisks(){const rows=['requests','collabs'].flatMap(k=>oaRows(k).filter(r=>oaOpen(k,r)&&r.due<asOf).map(r=>({k,r})));return `<section class="panel"><div class="section-title"><h2>OA 逾期事项</h2><span class="muted">${rows.length} 项</span></div><div class="oa-grid">${rows.map(({k,r})=>oaCard(k,r)).join('')||empty('暂无逾期办公申请或跨部门协作')}</div></section>`}
+function oaMulti(label,name,arr,values){return `<label class="full">${label}<select name="${name}" multiple size="5" required>${arr.map(m=>`<option value="${esc(m.id)}" ${values.includes(m.id)?'selected':''}>${esc(m.name+' · '+(m.role||''))}</option>`).join('')}</select><small class="muted">按住 Ctrl / Command 多选</small></label>`}
+function oaEdit(k,id){const r=id?data.oa[k].find(x=>x.id===id):{},projects=data.projects.filter(p=>C.oaCanProject(data,user,p.id));if(!projects.length)return notify('当前成员未关联项目，请在人力资源中维护项目范围');const managers=data.members.filter(m=>m.level!=='operator'&&m.id!==user.person),members=data.members;
+let body=field('标题','title',r.title)+select('关联项目','project',projects,r.project||projects[0].id)+field(k==='meetings'?'会议日期':k==='reports'?'报告截至日期':k==='notices'?'阅读确认期限':'截止日期','due',r.due||asOf,'date')+area(k==='meetings'?'议题 / 会前资料':k==='reports'?'本期成果与依据':'内容 / 背景与要求','body',r.body);
+if(k==='requests')body+=select('申请类别','category',['通用','资源','采购','费用'].map(id=>({id,name:id})),r.category||'通用')+numberField('申请金额（无金额填 0）','amount',r.amount||0,0,0.01)+select('币种','currency',[{id:'USD',name:'美元 USD'},{id:'CNY',name:'人民币 CNY'}],r.currency||'USD')+select('第一审批人','first',managers,r.approvers?.[0]||managers.find(m=>m.id===data.members.find(x=>x.id===user.person)?.reportsTo)?.id||managers[0]?.id)+select('第二审批人（可选）','second',[{id:'',name:'不设置第二级'},...managers],r.approvers?.[1]||'');
+if(k==='meetings')body+=field('会议时间','time',r.time||'10:00','time')+oaMulti('参会成员','attendees',members,r.attendees||[user.person]);
+if(k==='reports')body+=select('汇报周期','period',['日报','周报','月报'].map(id=>({id,name:id})),'周报')+select('点评负责人','reviewer',members.filter(m=>m.level!=='operator'),members.find(m=>m.id===data.members.find(x=>x.id===user.person)?.reportsTo)?.id||'ceo')+area('当前障碍 / 需要的支持','blockers','',false)+area('下一步计划','next')+'<p class="muted full">提交时自动附上当前身份在该项目可汇报的任务进度快照；后续任务变化不会改写本期快照。</p>';
+if(k==='collabs')body+=select('接收责任人（可跨部门）','owner',members.filter(m=>m.id!==user.person),members.find(m=>m.id!==user.person)?.id);
+if(k==='notices')body+=select('类型','category',['公告','制度'].map(id=>({id,name:id})),r.category||'公告')+oaMulti('指定阅读成员','audience',members,r.audience||members.map(m=>m.id));
+body+=mockAttachmentField();showModal((id?'修改并重新发布 / 提交':'新建')+' · '+oaTabs[k],`<div class="form-grid">${body}</div>`,fd=>{const values=Object.fromEntries(fd.entries());values.files=mockFiles(fd);if(k==='requests'){values.amount=Number(values.amount);values.approvers=[values.first,values.second].filter(Boolean)}if(k==='meetings')values.attendees=fd.getAll('attendees');if(k==='notices')values.audience=fd.getAll('audience');commit({type:'oa',op:({requests:'request',meetings:'meeting',reports:'report',collabs:'collab',notices:'notice'}[k]),id,values})});
+}
+function oaLog(log){return log.map(e=>`<div class="update"><b>${esc(who(e.person))}</b><small>${esc(e.time)}</small><p>${esc(e.note)}</p></div>`).join('')||'<p class="muted">暂无记录</p>'}
+function oaDetail(k,id){const r=data.oa[k]?.find(r=>r.id===id);if(!r||!C.oaVisible(data,user,k,r))return notify('无法查看此事项');const action=(label,op)=>button(label,'oa-command',id,`data-kind="${k}" data-op="${op}"`),author=r.author===user.person||user.role==='ceo';
+let body=`<div class="row">${badge(oaTabs[k],'blue')}${badge(oaStatus[r.status])}</div><p class="muted">${esc(projectName(r.project))} · 发起人 ${esc(who(r.author))} · ${esc(r.created)}</p><div class="criteria oa-pre">${esc(r.body)}</div><p>日期 / 截止：${esc(r.due)}</p>`,actions='';
+if(k==='requests'){
+body+=`<p>${esc(r.category)}申请 · ${money(r.amount,r.currency)}</p><div class="oa-chain">${r.approvers.map((p,i)=>`<span class="${r.status==='pending'&&i===r.step?'current':''}">${i+1}. ${esc(who(p))}${r.status==='pending'&&i===r.step?' · 待审批':''}</span>`).join('<span>→</span>')}</div><p class="muted">审批通过仅代表授权，实际付款与项目交付仍须分别登记、验收。</p>`;
+if(oaMine(k,r))actions+=action('审批并填写意见','decide');if(r.author===user.person&&r.status==='pending')actions+=action('撤回申请','withdraw');if(r.author===user.person&&['rejected','withdrawn'].includes(r.status))actions+=action('修改后重新提交','edit');if(author&&r.status==='pending')actions+=action('站内催办','remind');
+}else if(k==='meetings'){
+body+=`<h3>会前议题征集</h3>${oaLog(r.agenda||[])}`;
+if(r.status==='scheduled'&&(author||r.attendees.includes(user.person)))actions+=action('补充会前议题','agenda');
+body+=`<p>时间：${esc(r.time)} · 参会：${r.attendees.map(p=>esc(who(p))).join('、')}</p><h3>会议纪要与决议</h3>${oaLog(r.minutes)}<h3>关联项目行动</h3>${r.tasks.map(id=>{const t=data.tasks.find(t=>t.id===id);return `<p>${button(esc(t.name),'task',id,'','link')} · ${esc(who(t.owner))} · ${t.progress}% · ${state(t)}</p>`}).join('')||'<p class="muted">尚未生成行动</p>'}`;
+if(author){actions+=action('补充会议纪要','minutes');if(r.minutes.length)actions+=action('决议转为项目行动','action')}
+}else if(k==='reports'){
+body+=`<details><summary>提交时 OKR 关键结果快照（${(r.krSnapshot||[]).length} 项）</summary>${(r.krSnapshot||[]).map(m=>`<p>${esc(m.name)} · ${m.rate===null?'未配置量化指标':m.rate+'%'}</p>`).join('')}</details>`;
+body+=`<p>${esc(r.period)} · 点评人 ${esc(who(r.reviewer))}</p><h3>障碍与支持</h3><p class="oa-pre">${esc(r.blockers||'无')}</p><h3>下一步计划</h3><p class="oa-pre">${esc(r.next)}</p><details><summary>提交时项目进度快照（${r.snapshot.length} 项）</summary>${r.snapshot.map(t=>`<p>${esc(t.name)} · ${t.progress}%</p>`).join('')}</details><h3>负责人点评</h3>${oaLog(r.comments)}`;if(r.reviewer===user.person||user.role==='ceo')actions+=action('填写点评','comment');
+}else if(k==='collabs'){
+if(r.escalation){const a=data.oa.requests.find(a=>a.id===r.escalation);body+=`<div class="criteria">已升级 CEO：${badge(oaStatus[a.status])} ${oaLink('查看升级审批','requests',a.id,'link')}</div>`}
+if(user.role!=='ceo'&&(r.author===user.person||r.owner===user.person)&&r.status!=='done'&&!data.oa.requests.some(a=>a.id===r.escalation&&a.status==='pending'))actions+=action('升级 CEO 协调','escalate');
+body+=`<p>接收责任人：${esc(who(r.owner))}</p><div class="oa-chain">发起 → 接单 → 反馈结果 → 发起人确认</div>`;
+if(r.owner===user.person&&r.status==='pending')actions+=action('确认接单','accept');if(r.owner===user.person&&r.status==='accepted')actions+=action('提交协作结果','deliver');if(r.author===user.person&&r.status==='review')actions+=action('确认 / 退回结果','confirm');if(author&&r.status!=='done')actions+=action('站内催办','remind');
+}else{
+body+=`<p>${esc(r.category)} · 当前 v${r.version} · ${r.reads.length}/${r.audience.length} 已确认</p><p class="muted">阅读范围：${r.audience.map(p=>esc(who(p))).join('、')}</p><p>已确认：${r.reads.map(x=>esc(who(x.person))).join('、')||'暂无'}</p><p class="muted">未确认：${r.audience.filter(p=>!r.reads.some(x=>x.person===p)).map(p=>esc(who(p))).join('、')||'全部确认'}</p>${r.versions.length?`<details><summary>历史版本</summary>${r.versions.map(v=>`<h3>v${v.version} · ${esc(v.title)}</h3><p class="oa-pre">${esc(v.body)}</p>`).join('')}</details>`:''}`;
+if(oaMine(k,r))actions+=action('确认已阅读','ack');if(author&&user.role!=='operator')actions+=action('更新版本','edit');
+}
+body+=`<div class="actions oa-quick">${actions}</div><h3>处理记录</h3>${oaLog(r.events)}${discussionView(k,r)}`;showModal(r.title,body,null);
+}
+function oaCommand(k,id,op){const r=data.oa[k].find(x=>x.id===id);if(op==='edit')return oaEdit(k,id);if(op==='ack')return commit({type:'oa',op,id,values:{}});
+let heading='',body='',operation=op;
+if(op==='action'){
+heading='将会议决议生成项目行动';const ms=data.milestones.filter(m=>data.stages.some(s=>s.id===m.stage&&s.project===r.project));if(!ms.length)return notify('请先为该项目建立目标与 KR');body=field('行动名称','title')+select('关联关键结果 KR','milestone',ms,ms[0].id)+select('责任人','owner',data.members.filter(m=>m.id!=='ceo'),'chen')+field('截止日期','due',r.due,'date')+area('应交付物','body')+area('验收标准','criteria');
+}else{
+heading=({agenda:'补充会前议题',escalate:'升级 CEO 协调',decide:'处理办公申请',withdraw:'撤回申请',minutes:'记录会议纪要与决议',comment:'点评工作汇报',accept:'确认接单',deliver:'反馈协作结果',confirm:'确认协作结果',remind:'站内催办'}[op]);
+if(op==='decide')body+=select('审批结果','result',[{id:'yes',name:'通过，流转下一步'},{id:'no',name:'退回修改'}],'yes');
+if(op==='confirm')body+=select('确认结果','state',[{id:'done',name:'确认完成'},{id:'accepted',name:'退回继续完善'}],'done');
+body+=area(op==='minutes'?'会议纪要 / 决议内容':'处理说明 / 证据','note');if(op==='remind')body+='<p class="muted full">记录在本站内，不会发送邮件、短信或外部消息。</p>';
+}
+showModal(heading,`<p>${esc(r.title)}</p><div class="form-grid">${body}</div>`,fd=>{const values=Object.fromEntries(fd.entries());if(op==='decide')values.approve=values.result==='yes';if(op==='accept'||op==='deliver'||op==='confirm'){operation='collab-state';values.state=op==='accept'?'accepted':op==='deliver'?'review':values.state}if(op==='remind')values.kind=k;commit({type:'oa',op:operation,id,values})});
+}

@@ -1,0 +1,152 @@
+{
+  "time": "2026-10-18T08:07:51.682Z",
+  "passed": 29,
+  "total": 29,
+  "isolatedBrowser": true,
+  "results": [
+    {
+      "file": "verify.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 32,\n  \"total\": 32,\n  \"results\": [\n    {\n      \"name\": \"演示数据包含完整九阶段及45天、20店目标\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"执行人员不能编辑CEO方向\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"负责人只能分派所辖项目\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"不能反馈他人任务\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"依赖未验收阻止下游验收\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"提交→退回→重提→验收闭环\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"重复提交和非授权审批被阻止\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"日期倒置和循环依赖被阻止\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"障碍关闭必须有处理说明\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"战略调整保留前后快照\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"新增、排序、汇总及复盘行动项\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"非法备份被拒绝\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"首页显示演示业务与动态总览\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"渲染视图 path\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"渲染视图 tasks\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"渲染视图 approvals\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"渲染视图 timeline\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"渲染视图 risks\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"渲染视图 history\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"渲染视图 overview\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"战略编辑表单包含方向和验收标准\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"编辑战略后页面更新且已保存\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"战略变更历史含旧值和新值\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"执行人员不可见新增阶段按钮\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"执行人员工作列表按身份过滤\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"界面提交验收生成待验收状态\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"界面审批同步更新任务为已验收\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"新项目创建与本地保存\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"负责人仅显示所辖工作\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"复盘界面自动生成后续行动任务\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"备份导出入口触发下载\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"所有已保存业务数据可重新校验\",\n      \"pass\": true\n    }\n  ]\n}\n"
+    },
+    {
+      "file": "verify-management.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 19,\n  \"checks\": [\n    \"迁移保留既有战略、进度、审批与历史\",\n    \"新运营成员可被分派与反馈，跨人越权受阻\",\n    \"循环汇报关系被拒绝，普通员工可建立且无项目权限\",\n    \"职能记录必须关联业务项目，维护权限隔离\",\n    \"多级任务按叶子汇总，父任务不能提前验收\",\n    \"父子与依赖组合循环、超出父周期被阻止\",\n    \"KR量化结果与行动进度分开，支持运营汇报\",\n    \"CEO总览展示4个业务项目、2个独立职能模块及管理运营成员\",\n    \"CEO角色可查看真实成员汇报关系架构图\",\n    \"人力资源建立思考型成员并刷新保留\",\n    \"新增运营成员可接收项目任务并反馈进展\",\n    \"CEO设置可量化KR，关联运营成员填报实际结果\",\n    \"浏览器可逐层建立三级行动并呈现层级\",\n    \"财务独立模块可按项目定位并维护计划\",\n    \"财务可独立开窗且同浏览器窗口之间同步更新\",\n    \"独立窗口同时编辑时阻止旧表单覆盖新数据\",\n    \"组织架构入口与成员维护遵循角色分层\",\n    \"移动宽度下CEO总览无整页横向溢出\",\n    \"所有测试页面无JavaScript运行错误\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-oa.mjs",
+      "passed": true,
+      "output": "PASS 旧版迁移不覆盖业务记录，重复升级不新增示例\nPASS 多级审批按顺序通过，越权与重复审批被拒绝\nPASS 退回修改重走审批，撤回保留轨迹，不能自己审批\nPASS 会议决议一次转为项目任务，沿用责任人和验收流程\nPASS 工作汇报引用当前任务快照并支持负责人点评\nPASS 跨部门协作须接单、反馈、发起人确认，角色不能跳步\nPASS 公告面向指定成员，版本更新重新确认，运营成员不能发布\nPASS 无效导入被拒绝，失败操作不污染数据，历史保留\nPASS 参会人可补充议题，非参会人不可补充\nPASS 工作汇报保存KR快照，后续KR修改不覆盖已提交汇报\nPASS 协作可升级CEO审批，不重复生成待处理审批\nPASS 成员调整不能破坏待审批链，失败时保留原成员角色\n12 OA model checks passed\n"
+    },
+    {
+      "file": "verify-oa-browser.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 16,\n  \"checks\": [\n    \"CEO总览办公入口与六个模块可用\",\n    \"运营成员申请→负责人审批→CEO审批，统一中心可处理且文本安全转义\",\n    \"会议纪要与决议生成既有项目任务，并可打开原任务操作\",\n    \"汇报保存任务快照且负责人能填写点评\",\n    \"跨部门接单→反馈→发起人确认完成\",\n    \"指定公告阅读确认与版本更新重新确认\",\n    \"OA数据在页面刷新后保留\",\n    \"完整备份包含OA、审批记录与关联任务\",\n    \"OA独立窗口直接进入办公首页\",\n    \"办公记录可按关键词搜索\",\n    \"运营成员没有会议安排及公告发布入口\",\n    \"参会成员在浏览器中补充会前议题\",\n    \"协作升级生成CEO审批，统一中心可处理\",\n    \"六个OA页面在手机宽度下无整页横向溢出\",\n    \"真实浏览器旧版本保存数据自动迁移且原战略保留\",\n    \"全部页面无JavaScript运行错误\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-project-delete.mjs",
+      "passed": true,
+      "output": "PASS CEO可删除业务项目和关联数据，保留成员与其他项目\nPASS 负责人不能删除，名称不匹配和职能模块删除均被阻止\nPASS 跨项目依赖会阻止删除且不部分清理数据\nPASS 可删除最后一个业务项目，旧版迁移不会重新添加已删除项目\n4 project deletion checks passed\n"
+    },
+    {
+      "file": "verify-project-delete-browser.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 10,\n  \"checks\": [\n    \"日常页面提供归档，永久删除仅在已归档项目提供\",\n    \"取消删除保留项目\",\n    \"必须先下载备份并输入正确名称，误操作被拦截\",\n    \"确认删除后项目消失，刷新后不会重新出现\",\n    \"删除后总览、任务、审批、时间线及OA均正常渲染\",\n    \"删除前备份可恢复为归档状态\",\n    \"负责人和运营成员均无删除入口\",\n    \"新增按钮在手机宽度下无整页横向溢出\",\n    \"本地存储失败时撤销删除，保留原项目\",\n    \"浏览器无运行错误\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-admin.mjs",
+      "passed": true,
+      "output": "PASS 兼容旧版数据且行政权限与CEO权限分离\nPASS 请假审批与办理分开，普通成员不能代办或越权审批\nPASS 七种人事申请具有有效结构，日期倒置和普通成员入职被拒绝\nPASS 入职批准后由行政办理才创建成员，转岗可更新档案\nPASS 交接须接收人确认，离职会检查未交任务和资产\nPASS 资产借用归还维修闭环，重复分配及无权登记被拒绝\nPASS 行政可设置职位和授权，普通成员不能自授权限\nPASS 方案附件与评论回复可保存，非参与人及超额附件被拒绝\n8 administration checks passed\n"
+    },
+    {
+      "file": "verify-admin-browser.mjs",
+      "passed": true,
+      "output": "PASS administrative browser: HR approval/processing, mock attachment, asset loan, comments, persistence, five responsive tabs\n"
+    },
+    {
+      "file": "verify-member.mjs",
+      "passed": true,
+      "output": "PASS member model: todo CRUD, ownership, personnel records permissions, dates, visibility, contacts and migration\n"
+    },
+    {
+      "file": "verify-member-browser.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 8,\n  \"checks\": [\n    \"成员工作台入口与五项档案快捷入口、CEO可查看全部成员\",\n    \"本人待办可添加、编辑、完成与筛选；普通成员仅能查看本人工作台\",\n    \"月份切换、回到今天、日期选择与关联会议可交互\",\n    \"档案联系方式可编辑，合同、考勤、考核、岗位均可打开\",\n    \"人事管理员登记合同、直属负责人登记考核，项目行动可进入原有操作流程\",\n    \"成员记录刷新保留，删除个人待办须确认且不影响项目行动\",\n    \"手机布局无页面横向溢出\",\n    \"浏览器无JavaScript运行错误\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-governance.mjs",
+      "passed": true,
+      "output": "PASS 任务日历使用截止日，私有待办仅本人可见\nPASS 跨日申请每日显示，结束后消失\nPASS 普通成员不能查看财务、人事合同和完整历史\nPASS 统一待办包含执行审批办理验收与本人发起，数量来自同一集合\nPASS 归档不删关联数据，恢复不覆盖其他项目；非CEO不能变更状态\nPASS 经营指标独立于任务进度并保留统计期依据\nPASS 考核本人反馈确认，改动后重新确认\nPASS 资产可撤回和重提，审批不得复用旧状态\nPASS 结构化决策保留方案且可进入审批队列\nPASS 归档项目不能新增目标、填报KR或移动任务进入\nPASS 阶段通过必须依据当前标准，退回后可以重提\nPASS 20店扩展必须填报指标并复盘，指标填报不替代批准\nPASS 管理备份排除他人私人待办，恢复保留当前私人事项\nPASS 旧版私人待办历史在迁移后仍保密，包括已删除记录\nPASS 恢复旧备份不得静默删除缺失成员的私人待办\nPASS 跨部门审批协作和会议在受限视图仍显示待办与日历\n16 governance checks passed\n"
+    },
+    {
+      "file": "verify-governance-browser.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 15,\n  \"checks\": [\n    \"项目截止日显示在日历并可打开任务，运营成员使用个人首页\",\n    \"统一待办可打开本人待办，数字与筛选清单一致\",\n    \"主管不能从成员工作台、历史或导出入口读取个人待办\",\n    \"负责人检查与经营指标可更新，结果独立保存\",\n    \"决策方案、影响、建议和期限流转至CEO，处理后待办消失\",\n    \"归档移出日常项目，档案仍可查阅且单项目恢复\",\n    \"阶段成果由CEO与指定负责人分别确认后通过\",\n    \"合同权限与到期提醒、考核本人反馈和确认正常\",\n    \"跨日出差在期间内每天显示\",\n    \"资产申请可撤回、修改并重新提交\",\n    \"行政可分别授予财务查看与维护，查看授权不授予修改\",\n    \"财务角色仍可维护关联业务项目的财务计划\",\n    \"新增页面移动宽度无整页横向溢出\",\n    \"完整数据刷新保留，读取权限投影不会覆盖原始数据\",\n    \"无浏览器运行错误\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-resilience-browser.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 6,\n  \"checks\": [\n    \"实际管理备份不包含他人的私人待办或历史\",\n    \"管理备份恢复保留本机他人的私人待办\",\n    \"提交保存失败保留原记录和表单错误\",\n    \"重置、导入、日期设置的保存失败均撤销本次改动\",\n    \"交接清单必须逐项确认后才能接收\",\n    \"查看他人待办后CEO今日检查仍能打开自己的审批\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-operations.mjs",
+      "passed": true,
+      "output": "PASS operations migration preserves data and is idempotent\nPASS risk ownership and closure require evidence; queue updates\nPASS impact includes downstream milestones and preserves original plan\nPASS metric history keeps each actual submission and old target\nPASS weekly commitments cannot be created for another team\nPASS absence cover requires approved absence and substitute acceptance\nPASS rules route new requests and retain immutable rule snapshot\nPASS proxy approval observes dates, prevents self approval and records actual actor\nPASS overdue escalation is explicit and cannot skip before deadline\nPASS personal template and history are hidden from CEO and others\nPASS stage copy resets work and remaps internal dependencies only\nPASS batch assignment is atomic when one selected task is out of scope\nPASS paused projects do not contribute daily queue or task lateness\nPASS expired delegation hides request history and blocks comments atomically\nPASS normal and delegated inbox use current approval node deadline\nPASS historical rules and delegations permit departure without restoring authority\nPASS weekly commitments normalize any day to the same Monday\nPASS scoped visibility uses the requested demonstration date\nPASS unresolved registered risks block project closure and archive\n19 operations checks passed\n"
+    },
+    {
+      "file": "verify-operations-browser.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 11,\n  \"checks\": [\n    \"CEO首屏三个重点区，成员行政默认折叠\",\n    \"风险登记进入责任人待办，带处理结果关闭\",\n    \"指标保存逐次记录并展示趋势与依据\",\n    \"成员周承诺可维护并与复杂度展示\",\n    \"批量分派先预览影响，确认后保留原计划\",\n    \"个人草稿可恢复，模板套用要求重新核对\",\n    \"私人模板隔离，CEO路径模板可重选人员日期套用\",\n    \"规则匹配审批链，跨部门代审进入待办且记录实际处理人\",\n    \"批准请假后可建立替补，由接手人从待办确认\",\n    \"个人筛选切页、身份切换与刷新后保持且不串用\",\n    \"新增页面手机布局与刷新保存正常，无运行错误\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-navigation-browser.mjs",
+      "passed": true,
+      "output": "{\n  \"passed\": 5,\n  \"checks\": [\n    \"4个一级分类完整包含15个入口，默认展开当前分类\",\n    \"分类支持键盘展开与收起、当前位置和两级路径提示\",\n    \"全部二级入口可点击并打开原有页面\",\n    \"菜单状态刷新保留、成员隔离，角色可见权限不改变\",\n    \"桌面与手机两级菜单可用且无整页横向溢出\"\n  ]\n}\n"
+    },
+    {
+      "file": "verify-workload.mjs",
+      "passed": true,
+      "output": "PASS same scoped counts, inactive members collapsed and first actionable member expanded\nPASS filters isolate matching people while retaining overall scoped totals\nPASS expand, collapse and empty-member disclosure states work\nPASS registered commitments show deliverable, complexity and escaped text\nPASS operator view cannot reveal other member tasks or commitments\nPASS absence requiring handoff stays visible even without tasks\nPASS week change resets filtering and expansion without inventing commitments\nPASS empty scope renders readable guidance and no undefined totals\n8 workload checks passed\n"
+    },
+    {
+      "file": "verify-workforce.mjs",
+      "passed": true,
+      "output": "PASS workforce: migration, employee, GM scope, private data, positions, atomic permission denial\n"
+    },
+    {
+      "file": "verify-work-calendar.mjs",
+      "passed": true,
+      "output": "PASS work calendar: fixed days, overnight shift, IANA DST gap/fold, permission\n"
+    },
+    {
+      "file": "verify-work-tasks.mjs",
+      "passed": true,
+      "output": "PASS work tasks: publication permissions, direct reports, generation idempotence, historical template snapshots\nPASS daily work: non-project work, original project reference, atomic batch review, return/resubmit\nPASS coordination: minimal support visibility, approved absence, exempt next cycle, postpone and accepted cover\n"
+    },
+    {
+      "file": "verify-work-acceptance.mjs",
+      "passed": true,
+      "output": "PASS acceptance: project owner checks task, two reviewers, no duplicate or stale decision, submission timeliness\n"
+    },
+    {
+      "file": "verify-finance-office.mjs",
+      "passed": true,
+      "output": "PASS finance: four flows, role routing, escalation, separate payment, advance settlement, duplicate and invalid booking protection\n"
+    },
+    {
+      "file": "verify-notice-policy.mjs",
+      "passed": true,
+      "output": "PASS notices: ordinary vs important, versioned acknowledgment, supervisor-only followup\n"
+    },
+    {
+      "file": "verify-work-integration.mjs",
+      "passed": true,
+      "output": "PASS integration: published snapshots, commitments, scoped overview, minimal joint review, project cover, legacy notice guard\n"
+    },
+    {
+      "file": "verify-oa-upgrade-browser.mjs",
+      "passed": true,
+      "output": "PASS OA upgrade browser: GM, template → supervisor → employee → review, persistence, no page errors\n"
+    },
+    {
+      "file": "verify-review-fixes.mjs",
+      "passed": true,
+      "output": "PASS final review: HR preserves hidden membership, date-specific exemptions and atomic batch, no-project finance projection\n"
+    },
+    {
+      "file": "verify-finance-policy-browser.mjs",
+      "passed": true,
+      "output": "PASS financial request→two approvals→disbursement→settlement, GM privacy, notice version acknowledgments, clock, deep link, layouts and reload\n"
+    },
+    {
+      "file": "verify-office-edges.mjs",
+      "passed": true,
+      "output": "PASS office edges: budget currency, over-budget escalation, budget reduction cap, future inactive approver reassignment, separate HR/admin transfer\n"
+    },
+    {
+      "file": "complete build idempotence",
+      "passed": true
+    }
+  ]
+}

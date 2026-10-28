@@ -1,0 +1,1178 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "id": "kcg",
+      "name": "KCG 美国批发与超市渠道",
+      "code": "KCG",
+      "leader": "lin",
+      "goal": "10店45天试点：完成首单、履约、动销和回款闭环；通过复盘后推进20店目标。",
+      "priority": "P0",
+      "start": "2026-09-25",
+      "end": "2026-11-08",
+      "criteria": "10家试点店完成首单；每店有动销记录；到期款项完成核对；CEO审批后扩展20店。",
+      "kind": "business",
+      "lifecycle": "active",
+      "expansion": {
+        "status": "pilot",
+        "target": 10,
+        "note": "10店45天试点，经营指标待负责人填报；复盘和CEO批准后进入20店阶段。"
+      }
+    },
+    {
+      "id": "kcm",
+      "name": "KCM 零售运营",
+      "code": "KCM",
+      "leader": "lin",
+      "goal": "建立门店周度经营节奏，验证陈列与促销方案。",
+      "priority": "P1",
+      "start": "2026-10-01",
+      "end": "2026-11-15",
+      "criteria": "形成门店周报、陈列验收与促销复盘。",
+      "kind": "business",
+      "lifecycle": "active"
+    },
+    {
+      "id": "vm",
+      "name": "自动售货机 · 商场点位",
+      "code": "VM",
+      "leader": "zhou",
+      "goal": "筛选商场点位，完成合作条件和试运行方案。",
+      "priority": "P1",
+      "start": "2026-10-01",
+      "end": "2026-11-10",
+      "criteria": "2处点位完成条件确认与现场勘查。",
+      "kind": "business",
+      "lifecycle": "active"
+    },
+    {
+      "id": "media",
+      "name": "内容营销增长",
+      "code": "CM",
+      "leader": "zhou",
+      "goal": "建立内容生产、门店引流和线索反馈闭环。",
+      "priority": "P2",
+      "start": "2026-10-05",
+      "end": "2026-11-20",
+      "criteria": "完成12条内容及来源可追踪的线索复盘。",
+      "kind": "business",
+      "lifecycle": "active"
+    },
+    {
+      "id": "hr",
+      "name": "人力资源管理",
+      "code": "HR",
+      "leader": "gu",
+      "goal": "建立编制规划、招聘入职与绩效培养闭环，为各业务项目配置合适的人才。",
+      "priority": "P1",
+      "start": "2026-10-01",
+      "end": "2026-11-20",
+      "criteria": "关键岗位有编制依据；招聘及入职清单完整；绩效目标有责任人和复盘日期。",
+      "kind": "function",
+      "lifecycle": "active"
+    },
+    {
+      "id": "fin",
+      "name": "财务管理",
+      "code": "FIN",
+      "leader": "qian",
+      "goal": "统筹现金预算、应收应付与月度关账，明确每个业务项目的资金责任和回款节奏。",
+      "priority": "P0",
+      "start": "2026-10-01",
+      "end": "2026-11-15",
+      "criteria": "现金预测与预算审批可追踪；账款差异有处理记录；月度报表完成复核。",
+      "kind": "function",
+      "lifecycle": "active"
+    }
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "project": "kcg",
+      "name": "供应商开发",
+      "goal": "报价、交期及供应商资质记录齐全",
+      "order": 1
+    },
+    {
+      "id": "s2",
+      "project": "kcg",
+      "name": "SKU 建档",
+      "goal": "条码、箱规、成本与建议售价完整",
+      "order": 2
+    },
+    {
+      "id": "s3",
+      "project": "kcg",
+      "name": "采购备货",
+      "goal": "采购清单、数量、交期经确认",
+      "order": 3
+    },
+    {
+      "id": "s4",
+      "project": "kcg",
+      "name": "美国仓入库",
+      "goal": "实收、差异、库存记录可核对",
+      "order": 4
+    },
+    {
+      "id": "s5",
+      "project": "kcg",
+      "name": "销售拓店",
+      "goal": "10家门店联系人与意向可追踪",
+      "order": 5
+    },
+    {
+      "id": "s6",
+      "project": "kcg",
+      "name": "商务确认",
+      "goal": "商务条款与订单书面确认",
+      "order": 6
+    },
+    {
+      "id": "s7",
+      "project": "kcg",
+      "name": "订单履约",
+      "goal": "订单逐单签收，异常有关闭记录",
+      "order": 7
+    },
+    {
+      "id": "s8",
+      "project": "kcg",
+      "name": "促销动销",
+      "goal": "试点店逐店有陈列和销售记录",
+      "order": 8
+    },
+    {
+      "id": "s9",
+      "project": "kcg",
+      "name": "回款",
+      "goal": "到期应收逐笔核销，未到期款项有计划",
+      "order": 9
+    },
+    {
+      "id": "s-kcm",
+      "project": "kcm",
+      "name": "门店经营",
+      "goal": "建立门店周度经营节奏，验证陈列与促销方案。",
+      "order": 1
+    },
+    {
+      "id": "s-vm",
+      "project": "vm",
+      "name": "点位合作",
+      "goal": "筛选商场点位，完成合作条件和试运行方案。",
+      "order": 1
+    },
+    {
+      "id": "s-media",
+      "project": "media",
+      "name": "内容生产",
+      "goal": "建立内容生产、门店引流和线索反馈闭环。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-j9yye4p",
+      "project": "hr",
+      "name": "编制规划",
+      "goal": "汇总KCG渠道、仓配及运营岗位需求，明确职责、人数和成本。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-wdusc7r",
+      "project": "hr",
+      "name": "招聘与入职",
+      "goal": "按批准编制推进候选人评估、录用及入职准备。",
+      "order": 2
+    },
+    {
+      "id": "id-mvdfm6sq-n8c1x39",
+      "project": "hr",
+      "name": "绩效与培养",
+      "goal": "将业务目标分解到岗位，并约定反馈与培养节奏。",
+      "order": 3
+    },
+    {
+      "id": "id-mvdfm6sq-55e2czp",
+      "project": "fin",
+      "name": "现金与预算",
+      "goal": "汇总采购、仓配、门店、点位及人员支出，明确资金缺口。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-64nkako",
+      "project": "fin",
+      "name": "对账与回款",
+      "goal": "逐笔核对订单、签收、账期与付款凭证。",
+      "order": 2
+    },
+    {
+      "id": "id-mvdfm6sq-lcdw7qt",
+      "project": "fin",
+      "name": "月度关账",
+      "goal": "完成收入成本核对，向CEO提交现金及经营差异报告。",
+      "order": 3
+    }
+  ],
+  "milestones": [
+    {
+      "id": "m1",
+      "stage": "s1",
+      "name": "供应商开发完成",
+      "end": "2026-09-27",
+      "criteria": "报价、交期及供应商资质记录齐全",
+      "order": 1
+    },
+    {
+      "id": "m2",
+      "stage": "s2",
+      "name": "SKU 建档完成",
+      "end": "2026-09-30",
+      "criteria": "条码、箱规、成本与建议售价完整",
+      "order": 1
+    },
+    {
+      "id": "m3",
+      "stage": "s3",
+      "name": "采购备货完成",
+      "end": "2026-10-08",
+      "criteria": "采购清单、数量、交期经确认",
+      "order": 1
+    },
+    {
+      "id": "m4",
+      "stage": "s4",
+      "name": "美国仓入库完成",
+      "end": "2026-10-13",
+      "criteria": "实收、差异、库存记录可核对",
+      "order": 1
+    },
+    {
+      "id": "m5",
+      "stage": "s5",
+      "name": "销售拓店完成",
+      "end": "2026-10-18",
+      "criteria": "10家门店联系人与意向可追踪",
+      "order": 1
+    },
+    {
+      "id": "m6",
+      "stage": "s6",
+      "name": "商务确认完成",
+      "end": "2026-10-22",
+      "criteria": "商务条款与订单书面确认",
+      "order": 1
+    },
+    {
+      "id": "m7",
+      "stage": "s7",
+      "name": "订单履约完成",
+      "end": "2026-10-28",
+      "criteria": "订单逐单签收，异常有关闭记录",
+      "order": 1
+    },
+    {
+      "id": "m8",
+      "stage": "s8",
+      "name": "促销动销完成",
+      "end": "2026-11-04",
+      "criteria": "试点店逐店有陈列和销售记录",
+      "order": 1
+    },
+    {
+      "id": "m9",
+      "stage": "s9",
+      "name": "回款完成",
+      "end": "2026-11-08",
+      "criteria": "到期应收逐笔核销，未到期款项有计划",
+      "order": 1
+    },
+    {
+      "id": "m-kcm",
+      "stage": "s-kcm",
+      "name": "陈列与促销方案验收",
+      "end": "2026-10-12",
+      "criteria": "形成门店周报、陈列验收与促销复盘。",
+      "order": 1
+    },
+    {
+      "id": "m-vm",
+      "stage": "s-vm",
+      "name": "商场点位条件确认",
+      "end": "2026-10-07",
+      "criteria": "2处点位完成条件确认与现场勘查。",
+      "order": 1
+    },
+    {
+      "id": "m-media",
+      "stage": "s-media",
+      "name": "首批四条内容上线",
+      "end": "2026-10-16",
+      "criteria": "完成12条内容及来源可追踪的线索复盘。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-bxkx840",
+      "stage": "id-mvdfm6sq-j9yye4p",
+      "name": "编制规划完成",
+      "end": "2026-10-12",
+      "criteria": "每项岗位需求有业务依据、成本测算和CEO审批结论。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-2j5vl2z",
+      "stage": "id-mvdfm6sq-wdusc7r",
+      "name": "招聘与入职完成",
+      "end": "2026-11-05",
+      "criteria": "岗位、录用条件、到岗日期和入职责任人完整。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-ewkieb6",
+      "stage": "id-mvdfm6sq-n8c1x39",
+      "name": "绩效与培养完成",
+      "end": "2026-11-20",
+      "criteria": "岗位目标可衡量，培养事项有责任人和复盘日期。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-wv1djtr",
+      "stage": "id-mvdfm6sq-55e2czp",
+      "name": "现金与预算完成",
+      "end": "2026-10-13",
+      "criteria": "未来八周收支假设完整，重大支出有审批依据。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-n8ojwlb",
+      "stage": "id-mvdfm6sq-64nkako",
+      "name": "对账与回款完成",
+      "end": "2026-11-08",
+      "criteria": "每项账款有责任人、到期日与核对结果，差异有处理安排。",
+      "order": 1
+    },
+    {
+      "id": "id-mvdfm6sq-mb2por3",
+      "stage": "id-mvdfm6sq-lcdw7qt",
+      "name": "月度关账完成",
+      "end": "2026-11-15",
+      "criteria": "收入成本有依据，报表经复核，异常事项形成改进行动。",
+      "order": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "milestone": "m1",
+      "name": "确认首批供应商与报价",
+      "owner": "chen",
+      "roleName": "采购策略与供应商管理",
+      "start": "2026-09-25",
+      "end": "2026-09-27",
+      "delivery": "确认首批供应商与报价记录 / 演示文件链接",
+      "criteria": "报价、交期及供应商资质记录齐全",
+      "deps": [],
+      "priority": "P0",
+      "progress": 100,
+      "status": "done",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t2",
+      "milestone": "m2",
+      "name": "完成试点SKU主档",
+      "owner": "chen",
+      "roleName": "采购策略与供应商管理",
+      "start": "2026-09-28",
+      "end": "2026-09-30",
+      "delivery": "完成试点SKU主档记录 / 演示文件链接",
+      "criteria": "条码、箱规、成本与建议售价完整",
+      "deps": [
+        "t1"
+      ],
+      "priority": "P0",
+      "progress": 100,
+      "status": "done",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t3",
+      "milestone": "m3",
+      "name": "锁定首批采购与交期",
+      "owner": "chen",
+      "roleName": "采购策略与供应商管理",
+      "start": "2026-10-01",
+      "end": "2026-10-08",
+      "delivery": "锁定首批采购与交期记录 / 演示文件链接",
+      "criteria": "采购清单、数量、交期经确认",
+      "deps": [
+        "t2"
+      ],
+      "priority": "P0",
+      "progress": 65,
+      "status": "active",
+      "obstacle": "部分SKU交期未锁定，可能影响美国仓入库。",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t4",
+      "milestone": "m4",
+      "name": "核对入库预约与库存",
+      "owner": "wu",
+      "roleName": "仓配规划与异常协调",
+      "start": "2026-10-09",
+      "end": "2026-10-13",
+      "delivery": "核对入库预约与库存记录 / 演示文件链接",
+      "criteria": "实收、差异、库存记录可核对",
+      "deps": [
+        "t3"
+      ],
+      "priority": "P0",
+      "progress": 10,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t5",
+      "milestone": "m5",
+      "name": "完成10店试点意向名单",
+      "owner": "li",
+      "roleName": "渠道拓展与商务谈判",
+      "start": "2026-10-14",
+      "end": "2026-10-18",
+      "delivery": "完成10店试点意向名单记录 / 演示文件链接",
+      "criteria": "10家门店联系人与意向可追踪",
+      "deps": [
+        "t4"
+      ],
+      "priority": "P1",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t6",
+      "milestone": "m6",
+      "name": "确认首单与商务条件",
+      "owner": "li",
+      "roleName": "渠道拓展与商务谈判",
+      "start": "2026-10-19",
+      "end": "2026-10-22",
+      "delivery": "确认首单与商务条件记录 / 演示文件链接",
+      "criteria": "商务条款与订单书面确认",
+      "deps": [
+        "t5"
+      ],
+      "priority": "P1",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t7",
+      "milestone": "m7",
+      "name": "完成首批配送及签收",
+      "owner": "wu",
+      "roleName": "仓配规划与异常协调",
+      "start": "2026-10-23",
+      "end": "2026-10-28",
+      "delivery": "完成首批配送及签收记录 / 演示文件链接",
+      "criteria": "订单逐单签收，异常有关闭记录",
+      "deps": [
+        "t6"
+      ],
+      "priority": "P1",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t8",
+      "milestone": "m8",
+      "name": "执行门店促销与动销记录",
+      "owner": "sun",
+      "roleName": "营销策划与运营分析",
+      "start": "2026-10-29",
+      "end": "2026-11-04",
+      "delivery": "执行门店促销与动销记录记录 / 演示文件链接",
+      "criteria": "试点店逐店有陈列和销售记录",
+      "deps": [
+        "t7"
+      ],
+      "priority": "P1",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "t9",
+      "milestone": "m9",
+      "name": "核对账期与回款凭证",
+      "owner": "he",
+      "roleName": "财务分析与回款管理",
+      "start": "2026-11-05",
+      "end": "2026-11-08",
+      "delivery": "核对账期与回款凭证记录 / 演示文件链接",
+      "criteria": "到期应收逐笔核销，未到期款项有计划",
+      "deps": [
+        "t8"
+      ],
+      "priority": "P1",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "task-kcm",
+      "milestone": "m-kcm",
+      "name": "陈列与促销方案验收",
+      "owner": "sun",
+      "roleName": "营销策划与运营分析",
+      "start": "2026-10-05",
+      "end": "2026-10-12",
+      "delivery": "陈列与促销方案验收方案（演示）",
+      "criteria": "形成门店周报、陈列验收与促销复盘。",
+      "deps": [],
+      "priority": "P1",
+      "progress": 100,
+      "status": "review",
+      "obstacle": "",
+      "order": 1,
+      "updates": [
+        {
+          "time": "2026-10-08 16:30",
+          "person": "sun",
+          "note": "陈列清单和促销方案已提交（演示）。",
+          "progress": 100
+        }
+      ],
+      "parent": ""
+    },
+    {
+      "id": "task-vm",
+      "milestone": "m-vm",
+      "name": "商场点位条件确认",
+      "owner": "li",
+      "roleName": "渠道拓展与商务谈判",
+      "start": "2026-10-05",
+      "end": "2026-10-07",
+      "delivery": "商场点位条件确认方案（演示）",
+      "criteria": "2处点位完成条件确认与现场勘查。",
+      "deps": [],
+      "priority": "P1",
+      "progress": 40,
+      "status": "active",
+      "obstacle": "商场尚未确认电费分摊和撤场条款。",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "task-media",
+      "milestone": "m-media",
+      "name": "首批四条内容上线",
+      "owner": "sun",
+      "roleName": "营销策划与运营分析",
+      "start": "2026-10-05",
+      "end": "2026-10-16",
+      "delivery": "首批四条内容上线方案（演示）",
+      "criteria": "完成12条内容及来源可追踪的线索复盘。",
+      "deps": [],
+      "priority": "P1",
+      "progress": 35,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "id-mvdfm6sq-bkn1iyn",
+      "milestone": "id-mvdfm6sq-bxkx840",
+      "name": "确认业务岗位需求与编制",
+      "owner": "gu",
+      "roleName": "人力资源负责人",
+      "start": "2026-10-01",
+      "end": "2026-10-12",
+      "delivery": "岗位编制表（演示）",
+      "criteria": "每项岗位需求有业务依据、成本测算和CEO审批结论。",
+      "deps": [],
+      "priority": "P1",
+      "progress": 50,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "id-mvdfm6sq-nrjamt8",
+      "milestone": "id-mvdfm6sq-2j5vl2z",
+      "name": "完成关键岗位招聘及入职计划",
+      "owner": "tang",
+      "roleName": "人才招聘与组织发展",
+      "start": "2026-10-13",
+      "end": "2026-11-05",
+      "delivery": "招聘进度与入职检查表（演示）",
+      "criteria": "岗位、录用条件、到岗日期和入职责任人完整。",
+      "deps": [
+        "id-mvdfm6sq-bkn1iyn"
+      ],
+      "priority": "P1",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "id-mvdfm6sq-ky97sb3",
+      "milestone": "id-mvdfm6sq-ewkieb6",
+      "name": "建立岗位目标与培养计划",
+      "owner": "tang",
+      "roleName": "人才招聘与组织发展",
+      "start": "2026-11-06",
+      "end": "2026-11-20",
+      "delivery": "绩效目标与培养计划（演示）",
+      "criteria": "岗位目标可衡量，培养事项有责任人和复盘日期。",
+      "deps": [
+        "id-mvdfm6sq-nrjamt8"
+      ],
+      "priority": "P1",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "id-mvdfm6sq-1hu5ngz",
+      "milestone": "id-mvdfm6sq-wv1djtr",
+      "name": "编制滚动现金预测与预算",
+      "owner": "he",
+      "roleName": "财务分析与回款管理",
+      "start": "2026-10-01",
+      "end": "2026-10-13",
+      "delivery": "现金预测和预算明细（演示）",
+      "criteria": "未来八周收支假设完整，重大支出有审批依据。",
+      "deps": [],
+      "priority": "P0",
+      "progress": 60,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "id-mvdfm6sq-0qmwue7",
+      "milestone": "id-mvdfm6sq-n8ojwlb",
+      "name": "核对试点门店应收与供应商应付",
+      "owner": "he",
+      "roleName": "财务分析与回款管理",
+      "start": "2026-10-14",
+      "end": "2026-11-08",
+      "delivery": "应收应付与差异处理表（演示）",
+      "criteria": "每项账款有责任人、到期日与核对结果，差异有处理安排。",
+      "deps": [
+        "id-mvdfm6sq-1hu5ngz"
+      ],
+      "priority": "P0",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    },
+    {
+      "id": "id-mvdfm6sq-a67q5ns",
+      "milestone": "id-mvdfm6sq-mb2por3",
+      "name": "完成管理报表与差异分析",
+      "owner": "he",
+      "roleName": "财务分析与回款管理",
+      "start": "2026-11-09",
+      "end": "2026-11-15",
+      "delivery": "月度经营报表与分析（演示）",
+      "criteria": "收入成本有依据，报表经复核，异常事项形成改进行动。",
+      "deps": [
+        "id-mvdfm6sq-0qmwue7"
+      ],
+      "priority": "P0",
+      "progress": 0,
+      "status": "active",
+      "obstacle": "",
+      "order": 1,
+      "updates": [],
+      "parent": ""
+    }
+  ],
+  "approvals": [
+    {
+      "id": "a1",
+      "kind": "accept",
+      "task": "task-kcm",
+      "project": "kcm",
+      "title": "陈列与促销方案验收",
+      "detail": "演示交付物：门店陈列清单、促销方案。",
+      "status": "pending",
+      "created": "2026-10-08 16:30",
+      "person": "sun"
+    },
+    {
+      "id": "a2",
+      "kind": "decision",
+      "project": "kcg",
+      "title": "是否启用备选供应商",
+      "detail": "部分SKU供货延期。建议在采购预算不变的前提下补充备选供应商，最终交期需采购核验。",
+      "status": "pending",
+      "created": "2026-10-09 09:00",
+      "person": "lin"
+    }
+  ],
+  "history": [],
+  "reviews": [],
+  "catalogVersion": 2,
+  "members": [
+    {
+      "id": "ceo",
+      "name": "CEO",
+      "role": "战略决策",
+      "level": "ceo",
+      "reportsTo": "",
+      "projects": []
+    },
+    {
+      "id": "lin",
+      "name": "林经理",
+      "role": "KCG / KCM 负责人",
+      "level": "manager",
+      "reportsTo": "ceo",
+      "projects": [
+        "kcg",
+        "kcm"
+      ]
+    },
+    {
+      "id": "zhou",
+      "name": "周经理",
+      "role": "点位 / 内容负责人",
+      "level": "manager",
+      "reportsTo": "ceo",
+      "projects": [
+        "vm",
+        "media"
+      ]
+    },
+    {
+      "id": "chen",
+      "name": "陈采购",
+      "role": "采购策略与供应商管理",
+      "level": "operator",
+      "reportsTo": "lin",
+      "projects": [
+        "kcg"
+      ]
+    },
+    {
+      "id": "wu",
+      "name": "吴仓配",
+      "role": "仓配规划与异常协调",
+      "level": "operator",
+      "reportsTo": "lin",
+      "projects": [
+        "kcg"
+      ]
+    },
+    {
+      "id": "li",
+      "name": "李渠道",
+      "role": "渠道拓展与商务谈判",
+      "level": "operator",
+      "reportsTo": "lin",
+      "projects": [
+        "kcg",
+        "vm"
+      ]
+    },
+    {
+      "id": "sun",
+      "name": "孙运营",
+      "role": "营销策划与运营分析",
+      "level": "operator",
+      "reportsTo": "zhou",
+      "projects": [
+        "kcg",
+        "kcm",
+        "media"
+      ]
+    },
+    {
+      "id": "he",
+      "name": "何财务",
+      "role": "财务分析与回款管理",
+      "level": "operator",
+      "reportsTo": "qian",
+      "projects": [
+        "fin",
+        "kcg"
+      ]
+    },
+    {
+      "id": "gu",
+      "name": "顾经理",
+      "role": "人力资源负责人",
+      "level": "manager",
+      "reportsTo": "ceo",
+      "projects": [
+        "hr"
+      ]
+    },
+    {
+      "id": "qian",
+      "name": "钱经理",
+      "role": "财务负责人",
+      "level": "manager",
+      "reportsTo": "ceo",
+      "projects": [
+        "fin"
+      ]
+    },
+    {
+      "id": "tang",
+      "name": "唐人事",
+      "role": "人才招聘与组织发展",
+      "level": "operator",
+      "reportsTo": "gu",
+      "projects": [
+        "hr"
+      ]
+    }
+  ],
+  "staffing": [
+    {
+      "id": "id-mvdfm6sq-4zg7arm",
+      "project": "kcg",
+      "name": "渠道运营负责人",
+      "needed": 2,
+      "filled": 1,
+      "owner": "gu",
+      "due": "2026-10-30",
+      "note": "演示：负责拓店策略与关键商务协调。"
+    },
+    {
+      "id": "id-mvdfm6sq-s8ekmw0",
+      "project": "media",
+      "name": "内容策略运营",
+      "needed": 1,
+      "filled": 0,
+      "owner": "gu",
+      "due": "2026-10-25",
+      "note": "演示：负责内容选题、投放与复盘。"
+    }
+  ],
+  "finance": [
+    {
+      "id": "id-mvdfm6sq-dvoxx78",
+      "project": "kcg",
+      "name": "试点采购预算",
+      "category": "预算",
+      "planned": 50000,
+      "actual": 32000,
+      "currency": "USD",
+      "due": "2026-11-08",
+      "owner": "qian",
+      "note": "演示测算，不代表真实金额或已审批额度。"
+    },
+    {
+      "id": "id-mvdfm6sq-wur244j",
+      "project": "kcg",
+      "name": "试点门店回款计划",
+      "category": "应收",
+      "planned": 18000,
+      "actual": 5000,
+      "currency": "USD",
+      "due": "2026-11-08",
+      "owner": "he",
+      "note": "演示数据，需财务核对凭证。"
+    },
+    {
+      "id": "id-mvdfm6sq-o7kx1mv",
+      "project": "vm",
+      "name": "商场点位合作支出",
+      "category": "应付",
+      "planned": 6000,
+      "actual": 2000,
+      "currency": "USD",
+      "due": "2026-10-20",
+      "owner": "he",
+      "note": "演示合同支出，审批与付款独立核对。"
+    }
+  ],
+  "managementVersion": 3,
+  "oa": {
+    "requests": [
+      {
+        "project": "kcg",
+        "created": "2026-10-09 09:00:00",
+        "due": "2026-10-15",
+        "events": [],
+        "id": "id-mvdfm6sr-2njzy02",
+        "title": "演示 · 10店试点推广资源申请",
+        "body": "申请门店陈列与营销策划资源；先由项目负责人核对，再由 CEO 决策。",
+        "author": "chen",
+        "category": "资源",
+        "amount": 0,
+        "currency": "USD",
+        "approvers": [
+          "lin",
+          "ceo"
+        ],
+        "step": 0,
+        "status": "pending"
+      }
+    ],
+    "meetings": [
+      {
+        "project": "kcg",
+        "created": "2026-10-09 09:00:00",
+        "due": "2026-10-15",
+        "events": [],
+        "id": "id-mvdfm6sr-iefhjfs",
+        "title": "演示 · KCG 试点推进周会",
+        "body": "检查备货、门店签约、首单履约及回款障碍。",
+        "author": "lin",
+        "time": "10:00",
+        "attendees": [
+          "lin",
+          "chen"
+        ],
+        "minutes": [],
+        "tasks": [],
+        "status": "scheduled"
+      }
+    ],
+    "reports": [],
+    "collabs": [
+      {
+        "project": "kcg",
+        "created": "2026-10-09 09:00:00",
+        "due": "2026-10-15",
+        "events": [],
+        "id": "id-mvdfm6sr-auu2gu2",
+        "title": "演示 · 补充采购方案评估",
+        "body": "请采购运营比较交期、价格与风险，形成备选方案。",
+        "author": "lin",
+        "owner": "chen",
+        "status": "pending"
+      }
+    ],
+    "notices": [
+      {
+        "project": "kcg",
+        "created": "2026-10-09 09:00:00",
+        "due": "2026-10-15",
+        "events": [],
+        "id": "id-mvdfm6sr-hapgdbg",
+        "title": "演示 · 经营周报提交规范",
+        "body": "每周汇报成果、障碍、下一步行动，并引用项目进度；待决策事项应单独提交审批。",
+        "author": "lin",
+        "category": "制度",
+        "audience": [
+          "lin",
+          "chen"
+        ],
+        "version": 1,
+        "reads": [],
+        "versions": [],
+        "status": "published"
+      }
+    ]
+  },
+  "oaVersion": 1,
+  "adminVersion": 1,
+  "admin": {
+    "positions": [
+      {
+        "id": "admin-supervisor",
+        "name": "行政主管",
+        "permissions": [
+          "personnel",
+          "assets",
+          "access"
+        ]
+      },
+      {
+        "id": "hr-specialist",
+        "name": "人事专员",
+        "permissions": [
+          "personnel"
+        ]
+      }
+    ],
+    "assignments": [
+      {
+        "member": "gu",
+        "positions": [
+          "admin-supervisor"
+        ]
+      },
+      {
+        "member": "tang",
+        "positions": [
+          "hr-specialist"
+        ]
+      }
+    ],
+    "personnel": [],
+    "assets": [],
+    "assetRequests": []
+  },
+  "memberVersion": 1,
+  "memberWorkspace": {
+    "todos": [],
+    "records": [],
+    "contacts": []
+  },
+  "governanceVersion": 1,
+  "governance": {
+    "financeAccess": [
+      {
+        "member": "he",
+        "read": true,
+        "write": true
+      },
+      {
+        "member": "qian",
+        "read": true,
+        "write": true
+      }
+    ],
+    "outcomes": [
+      {
+        "id": "outcome-kcg-1",
+        "project": "kcg",
+        "name": "签约店数",
+        "unit": "家",
+        "target": 10,
+        "current": null,
+        "owner": "li",
+        "start": "2026-09-25",
+        "end": "2026-11-08",
+        "evidence": "尚未填报。演示指标目标，可由负责人修改。",
+        "tasks": [
+          "t5"
+        ],
+        "updated": "",
+        "author": "ceo"
+      },
+      {
+        "id": "outcome-kcg-2",
+        "project": "kcg",
+        "name": "完成首单店数",
+        "unit": "家",
+        "target": 10,
+        "current": null,
+        "owner": "li",
+        "start": "2026-09-25",
+        "end": "2026-11-08",
+        "evidence": "尚未填报。演示指标目标，可由负责人修改。",
+        "tasks": [
+          "t6"
+        ],
+        "updated": "",
+        "author": "ceo"
+      },
+      {
+        "id": "outcome-kcg-3",
+        "project": "kcg",
+        "name": "按约履约率",
+        "unit": "%",
+        "target": 95,
+        "current": null,
+        "owner": "wu",
+        "start": "2026-09-25",
+        "end": "2026-11-08",
+        "evidence": "尚未填报。演示指标目标，可由负责人修改。",
+        "tasks": [
+          "t7"
+        ],
+        "updated": "",
+        "author": "ceo"
+      },
+      {
+        "id": "outcome-kcg-4",
+        "project": "kcg",
+        "name": "完成动销反馈店数",
+        "unit": "家",
+        "target": 10,
+        "current": null,
+        "owner": "sun",
+        "start": "2026-09-25",
+        "end": "2026-11-08",
+        "evidence": "尚未填报。演示指标目标，可由负责人修改。",
+        "tasks": [
+          "t8"
+        ],
+        "updated": "",
+        "author": "ceo"
+      },
+      {
+        "id": "outcome-kcg-5",
+        "project": "kcg",
+        "name": "到期回款完成率",
+        "unit": "%",
+        "target": 100,
+        "current": null,
+        "owner": "he",
+        "start": "2026-09-25",
+        "end": "2026-11-08",
+        "evidence": "尚未填报。演示指标目标，可由负责人修改。",
+        "tasks": [
+          "t9"
+        ],
+        "updated": "",
+        "author": "ceo"
+      }
+    ],
+    "checkins": [],
+    "stageReviews": []
+  },
+  "operationsVersion": 1,
+  "operations": {
+    "risks": [],
+    "observations": [],
+    "commitments": [],
+    "covers": [],
+    "rules": [],
+    "delegates": [],
+    "templates": []
+  }
+}

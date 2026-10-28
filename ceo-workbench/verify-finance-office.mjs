@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import {fixture,run} from './verify-oa-upgrade-fixture.mjs';
+const {C,d,users:u}=fixture(),f=(user,op,v={},id)=>run(C,d,user,'finance-office',op,v,id);
+const base={title:'办公事项',body:'用途与依据已说明',kind:'advance',amount:'200',currency:'USD',project:'',due:'2026-10-22',special:false,budget:''};
+const req=f(u.employee,'request',base);assert.deepEqual(req.route.approvers,['lin','qian']);assert.throws(()=>f(u.employee,'decide',{approve:true,note:'自己批准'},req.id));
+f(u.supervisor,'decide',{approve:true,note:'需求确认'},req.id);f(u.finance,'decide',{approve:true,note:'资料核对'},req.id);assert.equal(d.financeOffice.requests.find(r=>r.id===req.id).status,'approved');assert.equal(d.financeOffice.bookings.length,0);
+f(u.finance,'book',{kind:'pay',amount:'200',bookingId:'pay-one',note:'演示发放记录'},req.id);f(u.finance,'book',{kind:'return',amount:'50',bookingId:'return-one',note:'归还部分'},req.id);f(u.finance,'book',{kind:'writeoff',amount:'150',bookingId:'writeoff-one',note:'核销凭据'},req.id);assert.equal(d.financeOffice.requests.find(r=>r.id===req.id).processing,'settled');
+const b=C.clone(d);assert.throws(()=>f(u.finance,'book',{kind:'writeoff',amount:'1',bookingId:'excess',note:'不得超额'},req.id));assert.deepEqual(d,b);assert.throws(()=>f(u.finance,'book',{kind:'pay',amount:'200',bookingId:'pay-one',note:'重复'},req.id));
+for(const kind of ['reimbursement','payment','budget'])assert.equal(f(u.employee,'request',{...base,kind,amount:'100'}).kind,kind);
+const large=f(u.employee,'request',{...base,amount:'100000'});assert.equal(large.route.approvers.at(-1),'ceo');
+d.members.find(m=>m.id==='qian').employment='离职';assert.throws(()=>f(u.supervisor,'decide',{approve:true,note:'节点离职应阻止推进'},large.id),/离职|有效|重派|在职/);
+console.log('PASS finance: four flows, role routing, escalation, separate payment, advance settlement, duplicate and invalid booking protection');

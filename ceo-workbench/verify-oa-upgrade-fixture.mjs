@@ -1,0 +1,3 @@
+import {readFileSync} from 'node:fs';
+export function fixture(){const C=new Function(readFileSync(new URL('core.js',import.meta.url),'utf8')+';return Core')();return {C,d:C.seed(),users:{ceo:{role:'ceo',person:'ceo'},gm:{role:'manager',person:'demo-gm'},supervisor:{role:'manager',person:'lin'},employee:{role:'operator',person:'demo-worker'},hrAdmin:{role:'manager',person:'gu'},finance:{role:'manager',person:'qian'},outsider:{role:'manager',person:'zhou'}},context:{now:'2026-10-18T01:00:00.000Z',zone:'Asia/Shanghai'}}}
+export function run(C,d,u,type,op,values={},id,context={now:'2026-10-18T01:00:00.000Z',zone:'Asia/Shanghai'}){return C.change(d,u,{type,op,values,id,context,asOf:context.now.slice(0,10)})}

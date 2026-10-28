@@ -1,0 +1,422 @@
+[
+  {
+    "file": "请先阅读.txt",
+    "sha256": "F539C6AF92DACBE9512EB4F435ECC9A9B1BF35C09F37AC83D2470437E4AC9DB4",
+    "bytes": 784
+  },
+  {
+    "file": "OA升级验证记录-20261018.txt",
+    "sha256": "99DE8DD2217FED1CE2D4D8EC665EE493BDD0518860DB2786FB7E21FFF201C86A",
+    "bytes": 5551
+  },
+  {
+    "file": "ceo-workbench/使用说明.txt",
+    "sha256": "55466313F85A4CBD7B8303BC97677557E2A0F17B4B627DA6B78DC333AF0390E9",
+    "bytes": 5605
+  },
+  {
+    "file": "ceo-workbench/admin-core.js",
+    "sha256": "183168D53000B27209C664874BB4401FFFE339563223A2CD4C5DDC95A1DE0745",
+    "bytes": 17047
+  },
+  {
+    "file": "ceo-workbench/admin-ui.js",
+    "sha256": "860767206D8EBAF008003708D86C59D0809455325B25028C6ECC5F6AAA20B8B5",
+    "bytes": 22928
+  },
+  {
+    "file": "ceo-workbench/admin.css",
+    "sha256": "504254375ECFF8882FC1EC7449186999BD8E5997DE6ABAAD7570BDFB8D743055",
+    "bytes": 1707
+  },
+  {
+    "file": "ceo-workbench/browser-navigation.mjs",
+    "sha256": "D3A97110BB4A88C622A06A3A06B03D6DEB28F3C258B880C8603D2F36DE8B2BB5",
+    "bytes": 306
+  },
+  {
+    "file": "ceo-workbench/browser-preview.mjs",
+    "sha256": "962F27C5D946AE646739A0066AE2A3BCA7D367F3350B3D101B6EBB8E768F21F8",
+    "bytes": 611
+  },
+  {
+    "file": "ceo-workbench/build-governance.mjs",
+    "sha256": "74E74969204522B6EF23C879A78496BF114EDD0E344945C8FC95D4B80F81D06B",
+    "bytes": 5557
+  },
+  {
+    "file": "ceo-workbench/build-oa-upgrade.mjs",
+    "sha256": "1A535447B2D9CAED3392255208ED4BC17D670ABD31778DB7FAFF1F73515C10CB",
+    "bytes": 2189
+  },
+  {
+    "file": "ceo-workbench/build-oa.mjs",
+    "sha256": "28C940CE4B8AE5BD5309AD9D4EB5D23B36E805FE4A2FA833113E8296BB90C0CF",
+    "bytes": 9509
+  },
+  {
+    "file": "ceo-workbench/build-operations.mjs",
+    "sha256": "7718C34AFB0252376B0DC38AE7D60F9B5FF195E15C8EC7912DB7027C71BBBAB2",
+    "bytes": 2808
+  },
+  {
+    "file": "ceo-workbench/core.js",
+    "sha256": "E5DE69F0F0D52D987C12E02C5E88BC452B3F839C18F79B746C1884BC9D557B07",
+    "bytes": 176457
+  },
+  {
+    "file": "ceo-workbench/finance-office-core.js",
+    "sha256": "2AC7777E4527F7957992A6A0476284313ED539D39EDE76E4B8CF91AA93112E58",
+    "bytes": 12367
+  },
+  {
+    "file": "ceo-workbench/finance-office-ui.js",
+    "sha256": "6A5F6A6AEB2A1BF3C71C9E5E3CAA6C66078069B06DD739C26ABEA8DAA06A2721",
+    "bytes": 8907
+  },
+  {
+    "file": "ceo-workbench/governance-core.js",
+    "sha256": "B7123B0C76EF78E410E82F17D51F856533464B6DC4677A74BF1CD724A329E9CD",
+    "bytes": 24950
+  },
+  {
+    "file": "ceo-workbench/governance-ui.js",
+    "sha256": "9BB1FA5E052EFCA55201134DE6F12B448261ECB98A83AA898BCE8BD82638D175",
+    "bytes": 24818
+  },
+  {
+    "file": "ceo-workbench/governance.css",
+    "sha256": "3D191AA18A9864B85BAEE64531FAC6199EAA0F5D5873BD29A8F238294EBE7DD3",
+    "bytes": 1390
+  },
+  {
+    "file": "ceo-workbench/index.html",
+    "sha256": "E92B5498C887F853D51E65FB842D7B62A78893180564373F28478692458AD594",
+    "bytes": 464750
+  },
+  {
+    "file": "ceo-workbench/member-core.js",
+    "sha256": "261CC258DA3F185F5522E0DB1AED1D27B77535C6295344B202069E87F577DDD7",
+    "bytes": 4302
+  },
+  {
+    "file": "ceo-workbench/member-ui.js",
+    "sha256": "82A42B3867CA4CE761608286F30F40E2853998963CBFF3A8A29E25268DC398CF",
+    "bytes": 16049
+  },
+  {
+    "file": "ceo-workbench/member.css",
+    "sha256": "B9DD3D951F694632346595010997BB51828A1315415C0FBE7D513EA66408BC23",
+    "bytes": 6891
+  },
+  {
+    "file": "ceo-workbench/navigation-ui.js",
+    "sha256": "773A967CF23994C7DF79F7112FD439C915E08B95D5A98BC2B5D66D2ADF35D101",
+    "bytes": 3019
+  },
+  {
+    "file": "ceo-workbench/navigation.css",
+    "sha256": "9312DD1DB46AA5F3489A865764E6B7B3C1AB32073E782593DAB0CA894CD39E8D",
+    "bytes": 1796
+  },
+  {
+    "file": "ceo-workbench/notice-policy-core.js",
+    "sha256": "EC3248077E33602DA602287956A8390A6D3F858DB52DED8B87D8F85D17AE225A",
+    "bytes": 5942
+  },
+  {
+    "file": "ceo-workbench/notice-policy-ui.js",
+    "sha256": "2E369634EF0D75D6317B62B5B3F0BA1EE6DEF5B734925ABB163E589D60E381EA",
+    "bytes": 4752
+  },
+  {
+    "file": "ceo-workbench/oa-core.js",
+    "sha256": "D42B5EF315941D36BD3C8FB606D530216C76C0A962DB0270BC337114A84CAD38",
+    "bytes": 13039
+  },
+  {
+    "file": "ceo-workbench/oa-ui.js",
+    "sha256": "BD8DA2998F10317DBD7543F77829D2B02A708A152F93E804747A14B5DB247F29",
+    "bytes": 17567
+  },
+  {
+    "file": "ceo-workbench/oa-upgrade.css",
+    "sha256": "0D7F184A134A24C41C7701E10A27A70F8B97A0587A27C98437E3C2ECA6DBF5B8",
+    "bytes": 3002
+  },
+  {
+    "file": "ceo-workbench/oa.css",
+    "sha256": "7569BD9D033C9AB138A9E03B8AD022F61BAEFC1BD1CFB10FCB94FAA648246505",
+    "bytes": 1915
+  },
+  {
+    "file": "ceo-workbench/OA升级使用指南.txt",
+    "sha256": "55466313F85A4CBD7B8303BC97677557E2A0F17B4B627DA6B78DC333AF0390E9",
+    "bytes": 5605
+  },
+  {
+    "file": "ceo-workbench/operations-core.js",
+    "sha256": "EC2A623A6995758FE0108B63DD860CD3DCC906A04316F3366AB88EEC33E2950A",
+    "bytes": 22156
+  },
+  {
+    "file": "ceo-workbench/operations-ui.js",
+    "sha256": "B4BCD4F840D73747FAF22C146F9325D781F3D3639116FBBAC38C73FDFD6C12AE",
+    "bytes": 30918
+  },
+  {
+    "file": "ceo-workbench/operations.css",
+    "sha256": "6170F2D08A34979B653B19ABFE9D5E0C094E5BC0D9B043462745399B9EC70B71",
+    "bytes": 1668
+  },
+  {
+    "file": "ceo-workbench/project-delete-core.js",
+    "sha256": "31D4DCDBC0F343FCE662371AC928F905B746F759B92D8E11BD0941BB46C48847",
+    "bytes": 2765
+  },
+  {
+    "file": "ceo-workbench/project-delete-ui.js",
+    "sha256": "4401B4CA9B24A1A6B7F493D7C796B0E43099AE7BC6828C3D5294EADCAEC0B3B6",
+    "bytes": 2385
+  },
+  {
+    "file": "ceo-workbench/validation-summary.json",
+    "sha256": "9333C9320B9917A077D59967103CC9DC58B4E4D041BEEE78D0C029ED96D785AA",
+    "bytes": 18982
+  },
+  {
+    "file": "ceo-workbench/verify-admin-browser.mjs",
+    "sha256": "1780FF7109DAFDED00842EFCCA95E63743EC8B87F0F6A6480EEE40159E1491BE",
+    "bytes": 4032
+  },
+  {
+    "file": "ceo-workbench/verify-admin.mjs",
+    "sha256": "AB17DCE7949F33588B2B635D71C713B56F18D5425F5FEA0014FE57AF9C8A1A24",
+    "bytes": 6673
+  },
+  {
+    "file": "ceo-workbench/verify-all.mjs",
+    "sha256": "42317D011EBEBEC1332E8ADC0E9D39AF4E7D48F85F4FAB3DE884E3CE2FF68434",
+    "bytes": 2216
+  },
+  {
+    "file": "ceo-workbench/verify-browser.mjs",
+    "sha256": "B01D8ABC77A21D4B641617B8D495B2E1ED075E4E5208D75BA62FC85B6799A468",
+    "bytes": 124
+  },
+  {
+    "file": "ceo-workbench/verify-finance-office.mjs",
+    "sha256": "A8F58024AC74B86088EBA2A4C3A4A0E15A128E8D08CBD3826929223D98E9A576",
+    "bytes": 2015
+  },
+  {
+    "file": "ceo-workbench/verify-finance-policy-browser.mjs",
+    "sha256": "656F878D65909A9BE7F0B50C3F8C10849CDCB288CAF16449457970406BE3986B",
+    "bytes": 5102
+  },
+  {
+    "file": "ceo-workbench/verify-governance-browser.mjs",
+    "sha256": "F0AAB2C2A6826182684E78FFB3E88CC860B1CD9C872311BE427A6304CB8D99AC",
+    "bytes": 10991
+  },
+  {
+    "file": "ceo-workbench/verify-governance.mjs",
+    "sha256": "CD476091BC2DD776554B16945DB23510D9367064900B60685A968F9031287303",
+    "bytes": 9038
+  },
+  {
+    "file": "ceo-workbench/verify-management.mjs",
+    "sha256": "7BDFEF52E702255F9A04B570FDC2F6A75F5BADEA69541EA4DF7F2B739249E72B",
+    "bytes": 14670
+  },
+  {
+    "file": "ceo-workbench/verify-member-browser.mjs",
+    "sha256": "F4E13D92F2475AC4D4BC7369410851F33A055AC4AAA2ACE790DF09FC80EE1FF4",
+    "bytes": 5900
+  },
+  {
+    "file": "ceo-workbench/verify-member.mjs",
+    "sha256": "DFA0DF1E1F3A7A1041CCBCA128CA2BFBFC41891DF48BE26DDEC72285778A1D43",
+    "bytes": 2064
+  },
+  {
+    "file": "ceo-workbench/verify-navigation-browser.mjs",
+    "sha256": "2F925CBA7300A327536D44811EFD85136EBDCED836D0342E88B70CAB3F1EA710",
+    "bytes": 3960
+  },
+  {
+    "file": "ceo-workbench/verify-notice-policy.mjs",
+    "sha256": "1FD8C7A40C3EC1A373174CD14B0DD4D1BB991ECF5106D122FE4278064E81681A",
+    "bytes": 1570
+  },
+  {
+    "file": "ceo-workbench/verify-oa-browser.mjs",
+    "sha256": "1154E5BE1168D900E9CE95AFE752AEE6D25F09C12112791374AD140F81F90FED",
+    "bytes": 10981
+  },
+  {
+    "file": "ceo-workbench/verify-oa-upgrade-browser.mjs",
+    "sha256": "6DC60869346D65D8728BD83AC18B023F413BD5B6B1F4B89BE0F5BEE7AAA97BB3",
+    "bytes": 3768
+  },
+  {
+    "file": "ceo-workbench/verify-oa-upgrade-fixture.mjs",
+    "sha256": "AFB3B5BC15783B275BB649A0094EE53F9E46AC792872B113A64627AE461B913F",
+    "bytes": 713
+  },
+  {
+    "file": "ceo-workbench/verify-oa.mjs",
+    "sha256": "6F59B16654507348C0C6B00E76A3FA5A82F33BCFC19B17657B454F06CB4CB768",
+    "bytes": 7196
+  },
+  {
+    "file": "ceo-workbench/verify-office-edges.mjs",
+    "sha256": "8BADACA0069E9FD51D8F1DF9783B10C08FBFF3966CFC019936CBB5993E189255",
+    "bytes": 2450
+  },
+  {
+    "file": "ceo-workbench/verify-operations-browser.mjs",
+    "sha256": "7408F6942C1ABBB11B0C7821B862561B8E2025778A913CB1450E00895312A0A9",
+    "bytes": 9780
+  },
+  {
+    "file": "ceo-workbench/verify-operations.mjs",
+    "sha256": "2237EC3D3372CEE4F8BD9E0F7F8FEE61F462107CEF8FDF27232E131D01C2AFCA",
+    "bytes": 10293
+  },
+  {
+    "file": "ceo-workbench/verify-project-delete-browser.mjs",
+    "sha256": "1A7954EB1A0DC0966F5AE9FF279F65063D02C4D14327456D1F845F958BB1728A",
+    "bytes": 5447
+  },
+  {
+    "file": "ceo-workbench/verify-project-delete.mjs",
+    "sha256": "E7D82FC9D585B187E08D9594CAA2434F499C92FA0AB85513A7927AADAB9929B8",
+    "bytes": 2576
+  },
+  {
+    "file": "ceo-workbench/verify-resilience-browser.mjs",
+    "sha256": "5E71F03559109C859A04FD13D80489AE83234B49F64863EC0CF8146A71972E24",
+    "bytes": 6341
+  },
+  {
+    "file": "ceo-workbench/verify-review-fixes.mjs",
+    "sha256": "AB231312EEB8CF64BAE224BACBFCB6FB8EB4E508DC4136C2B7063195EE5662F6",
+    "bytes": 2221
+  },
+  {
+    "file": "ceo-workbench/verify-work-acceptance.mjs",
+    "sha256": "805786BC95F21CD45C94390DEE931589366079A51565F430BF4DFC73F16A7CA8",
+    "bytes": 2379
+  },
+  {
+    "file": "ceo-workbench/verify-work-calendar.mjs",
+    "sha256": "C1158F33522F938786EE4A4EBEEE69C92A7E42087BF76E9FAA122EF1306FFA97",
+    "bytes": 1509
+  },
+  {
+    "file": "ceo-workbench/verify-work-integration.mjs",
+    "sha256": "386033A1DEE71C8B099A4563E2777A1648F062A4DEECBE23BEA4ED2BF47A9AE2",
+    "bytes": 3464
+  },
+  {
+    "file": "ceo-workbench/verify-work-tasks.mjs",
+    "sha256": "263A69322FB023365B2684538DAB372462B9B314F90EF0F0B0D2605274EE53BE",
+    "bytes": 5767
+  },
+  {
+    "file": "ceo-workbench/verify-workforce.mjs",
+    "sha256": "8161C8DD52636361173D8BD4F691C25BA5ED62C44B6E7A9C53CD6EE49F281186",
+    "bytes": 1974
+  },
+  {
+    "file": "ceo-workbench/verify-workload.mjs",
+    "sha256": "392D644DB480F8E11F9C25001DEE98197FFEECDA776E0C788C5E307AEE6A80FA",
+    "bytes": 4555
+  },
+  {
+    "file": "ceo-workbench/verify.mjs",
+    "sha256": "77F4BE559C16E3234F58A75D7AEB9BF7DBC91DF70DC2EB733C98A08A3BE01858",
+    "bytes": 10373
+  },
+  {
+    "file": "ceo-workbench/work-calendar-core.js",
+    "sha256": "3495E9A2C8E885CA428433BABE4A55D6162848191828FB6B2316B2746CBF693F",
+    "bytes": 5547
+  },
+  {
+    "file": "ceo-workbench/work-overview-ui.js",
+    "sha256": "8608CFB79230193A867B1E0F2906949D0906AD310554EDB19CF64E6BB34EB06B",
+    "bytes": 7653
+  },
+  {
+    "file": "ceo-workbench/work-tasks-core.js",
+    "sha256": "C6C2BCE61B90D480734C53084559C451577CE791C10DE64E9EE9CBB7CE18CDDC",
+    "bytes": 30476
+  },
+  {
+    "file": "ceo-workbench/work-tasks-ui.js",
+    "sha256": "1ADE244AA27FF9C586AF8B4ACAFBF5DFC6EB7879DD4ED751D85E94BF6C888846",
+    "bytes": 24444
+  },
+  {
+    "file": "ceo-workbench/workforce-core.js",
+    "sha256": "A5F3FC057C1954EEF4A3C9F958814E0ED527AF11D92004D846031C08DB2C3678",
+    "bytes": 8212
+  },
+  {
+    "file": "ceo-workbench/workforce-ui.js",
+    "sha256": "ADE2B06C0F798ACDB507208609280EAFAB723D4D7E6544AFCD451868B4C3AFF7",
+    "bytes": 10464
+  },
+  {
+    "file": "ceo-workbench/workload-ui.js",
+    "sha256": "857B58AEF2B9C46BFB11B00BA3E4F9E99A5C5A5F22017D8D1E75CAB7F658F305",
+    "bytes": 10143
+  },
+  {
+    "file": "ceo-workbench/workload.css",
+    "sha256": "CAA574A971A2570C329278684CA294788F9155863E4278199E7125C3FBA189DB",
+    "bytes": 7846
+  },
+  {
+    "file": "ceo-workbench/qa/oa-upgrade-compact.png",
+    "sha256": "130DD95CDC865A6E45C1A86B1760A851F8866D3067A7EDC2CA2145F6A3D4601A",
+    "bytes": 91595
+  },
+  {
+    "file": "ceo-workbench/qa/oa-upgrade-overview.png",
+    "sha256": "72E363B6970DC322E78240D7FE821FBEAED3CBF517C3121E8ACA23D6A6788DD8",
+    "bytes": 131276
+  },
+  {
+    "file": "ceo-workbench/qa/oa-upgrade-workforce.png",
+    "sha256": "AFF6219116081C08786FA83C1FC5FDE600FC43B7B77DF3068788210BF963FDD5",
+    "bytes": 171095
+  },
+  {
+    "file": "docs/superpowers/execution/oa-upgrade/legacy-seed.json",
+    "sha256": "4AD03AD272DC258F82B4D85B39E498B65E236F752DA46E5FF46247DF48E6995F",
+    "bytes": 30974
+  },
+  {
+    "file": "docs/superpowers/execution/oa-upgrade/progress.md",
+    "sha256": "5FB57073E037874FF7FCD9A9B8E52894EE8F2BD0B4BB3E2700FE039A9375AF4E",
+    "bytes": 4764
+  },
+  {
+    "file": "docs/superpowers/execution/oa-upgrade/regression-final.log",
+    "sha256": "688E5B9AD4C6FA33D2CDDA2748D951FBC0680390271BFB460110BA81BF98D2EF",
+    "bytes": 874
+  },
+  {
+    "file": "docs/superpowers/plans/2026-10-18-oa-prototype-upgrade.md",
+    "sha256": "F116576C2EB3B400EECB1119CCB997AC4DD4EBA08F793B67FECBAA285BE7F6CC",
+    "bytes": 29607
+  },
+  {
+    "file": "docs/superpowers/specs/2026-10-18-oa-prototype-upgrade-design.md",
+    "sha256": "9FC6DE9091827DC69FA4A6A3E514C50126257098D833EC42A3806AB92D5CA729",
+    "bytes": 17356
+  }
+]

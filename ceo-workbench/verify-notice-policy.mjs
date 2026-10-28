@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';import {fixture,run} from './verify-oa-upgrade-fixture.mjs';
+const {C,d,users:u,context}=fixture();const publish=v=>run(C,d,u.hrAdmin,'notice-policy','publish',{title:'制度说明',body:'演示工作要求',project:'',category:'制度',importance:'important',members:['demo-worker'],departments:[],positions:[],effectiveAt:'2026-10-18T00:00:00.000Z',deadlineAt:'2026-10-20T10:00:00.000Z',...v});
+const ordinary=publish({importance:'ordinary'});assert.equal(C.noticePending(d,u.employee,context).some(r=>r.id===ordinary.id),false);
+const r=publish({});assert.ok(C.noticePending(d,u.employee,context).some(x=>x.id===r.id));run(C,d,u.employee,'notice-policy','ack',{},r.id);assert.equal(C.noticePending(d,u.employee,context).some(x=>x.id===r.id),false);
+run(C,d,u.hrAdmin,'notice-policy','publish',{...r,title:'新版本',body:'更新的要求',members:['demo-worker'],departments:[],positions:[],effectiveAt:r.effectiveAt,deadlineAt:r.deadlineAt},r.id);assert.equal(d.oa.notices.find(x=>x.id===r.id).version,2);assert.ok(C.noticePending(d,u.employee,context).some(x=>x.id===r.id));assert.ok(d.oa.notices.find(x=>x.id===r.id).versions[0].reads.length===1);
+assert.deepEqual(C.noticeFollowup(d,u.supervisor,context).filter(x=>x.id===r.id).map(x=>x.member),['demo-worker']);assert.equal(C.noticeFollowup(d,u.outsider,context).length,0);
+assert.throws(()=>run(C,d,u.employee,'notice-policy','publish',{...r,members:['lin']},r.id));console.log('PASS notices: ordinary vs important, versioned acknowledgment, supervisor-only followup');

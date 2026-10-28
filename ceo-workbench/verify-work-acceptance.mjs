@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';import {fixture,run} from './verify-oa-upgrade-fixture.mjs';
+const {C,d,users:u}=fixture();
+C.change(d,u.supervisor,{type:'decide',id:'a1',approve:true,note:'负责人确认普通子任务'});assert.equal(d.tasks.find(t=>t.id==='task-kcm').status,'done');
+const stage=run(C,d,u.supervisor,'work-tasks','joint-submit',{stage:'s1',reviewer:'lin',evidence:'该阶段全部成果已整理'});
+run(C,d,u.ceo,'work-tasks','joint-decide',{approve:true,note:'CEO确认'},stage.id);assert.equal(d.governance.stageReviews.find(r=>r.id===stage.id).status,'pending');
+assert.throws(()=>run(C,d,u.ceo,'work-tasks','joint-decide',{approve:true,note:'重复确认'},stage.id));
+run(C,d,u.supervisor,'work-tasks','joint-decide',{approve:true,note:'负责人确认'},stage.id);assert.equal(d.governance.stageReviews.find(r=>r.id===stage.id).status,'approved');
+const task=run(C,d,u.supervisor,'work-tasks','adhoc-save',{name:'准时提交后晚验收',owner:'demo-worker',department:'仓储',requirement:'提供成果',date:'2026-10-19',time:'18:00',zone:'Asia/Shanghai',priority:'P1'}),ref={kind:'work',id:task.id};
+const s=run(C,d,u.employee,'work-tasks','submit',{ref,result:'截止前已提交'},'',{now:'2026-10-19T09:59:00.000Z',zone:'Asia/Shanghai'});run(C,d,u.supervisor,'work-tasks','daily-review',{member:'demo-worker',workDate:'2026-10-19',decisions:[{ref,submissionId:s.id,decision:'accept',reason:'已检查'}]},'',{now:'2026-10-21T01:00:00.000Z',zone:'Asia/Shanghai'});
+const facts=C.workFacts(d,u.ceo,{now:'2026-10-21T01:00:00.000Z',zone:'America/New_York'});assert.equal(facts.find(r=>r.ref.id===task.id).timeliness,'on_time');assert.equal(facts.filter(r=>r.ref.id===task.id).length,1);assert.equal(facts.find(r=>r.ref.id===task.id).acceptedAt,'2026-10-21T01:00:00.000Z');
+const r2=run(C,d,u.supervisor,'work-tasks','joint-submit',{stage:'s2',reviewer:'lin',evidence:'第二阶段结果'});run(C,d,u.ceo,'work-tasks','joint-decide',{approve:true,note:'确认'},r2.id);run(C,d,u.supervisor,'work-tasks','joint-decide',{approve:false,note:'需补充'},r2.id);const r3=run(C,d,u.supervisor,'work-tasks','joint-submit',{stage:'s2',reviewer:'lin',evidence:'补充后的结果'});assert.equal(r3.decisions.length,0);
+console.log('PASS acceptance: project owner checks task, two reviewers, no duplicate or stale decision, submission timeliness');

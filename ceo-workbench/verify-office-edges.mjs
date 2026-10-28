@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';import{fixture,run}from'./verify-oa-upgrade-fixture.mjs';
+const{C,d,users:u}=fixture(),f=(who,op,v={},id)=>run(C,d,who,'finance-office',op,v,id),base={title:'办公预算',body:'用途和依据',kind:'budget',amount:'500',currency:'USD',project:'',due:'2026-10-22',special:false,budget:''};
+const approve=id=>{f(u.supervisor,'decide',{approve:true,note:'需求确认'},id);f(u.finance,'decide',{approve:true,note:'财务核对'},id)};
+const budget=f(u.employee,'request',base);approve(budget.id);f(u.finance,'book',{kind:'budget-apply',bookingId:'budget-001',note:'登记批准预算'},budget.id);const budgetId=d.financeOffice.budgets[0].id;
+const snap=C.clone(d);assert.throws(()=>f(u.employee,'request',{...base,kind:'payment',currency:'CNY',budget:budgetId}));assert.deepEqual(d,snap);
+const payment=f(u.employee,'request',{...base,kind:'payment',amount:'400',budget:budgetId});approve(payment.id);f(u.finance,'book',{kind:'pay',amount:'400',bookingId:'pay-001',note:'付款登记'},payment.id);
+const over=f(u.employee,'request',{...base,kind:'reimbursement',amount:'200',budget:budgetId});assert.equal(over.route.overBudget,true);assert.equal(over.route.approvers.at(-1),'ceo');
+const reduce=f(u.employee,'request',{...base,amount:'100',budget:budgetId});approve(reduce.id);assert.throws(()=>f(u.finance,'book',{kind:'budget-apply',bookingId:'reduce-001',note:'应阻止低于占用'},reduce.id));
+d.members.find(m=>m.id==='qian').employment='离职';assert.throws(()=>f(u.supervisor,'decide',{approve:true,note:'不能越过离职节点'},over.id));f(u.ceo,'reassign',{index:1,person:'he',note:'财务接任'},over.id);assert.equal(d.oa.requests.find(o=>o.id===over.oaRequestId).approvers[1],'he');f(u.supervisor,'decide',{approve:true,note:'接任后可推进'},over.id);
+assert.doesNotThrow(()=>C.validate(d));
+const before=d.admin.assignments.find(a=>a.member==='gu').positions;const position=before[0];run(C,d,u.ceo,'workforce','function-transfer',{from:'gu',to:'tang',position,reason:'拆分行政职责'});assert.ok(d.admin.assignments.find(a=>a.member==='tang').positions.includes(position));assert.ok(!d.admin.assignments.find(a=>a.member==='gu').positions.includes(position));assert.ok(d.workforce.events.some(e=>e.to==='tang'));
+console.log('PASS office edges: budget currency, over-budget escalation, budget reduction cap, future inactive approver reassignment, separate HR/admin transfer');

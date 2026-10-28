@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';import {fixture,run} from './verify-oa-upgrade-fixture.mjs';
+const {C,d,users:u}=fixture();
+const scoped=C.scoped(d,u.hrAdmin),m=scoped.members.find(m=>m.id==='chen'),p=scoped.workforce.profiles.find(p=>p.member===m.id);
+run(C,d,u.hrAdmin,'workforce','profile-save',{...m,...p,kind:p.kind,projects:m.projects,department:'采购更新',zone:p.zone},m.id);
+assert.deepEqual(d.members.find(m=>m.id==='chen').projects,['kcg']);
+const cmd=(who,op,v={},id)=>run(C,d,who,'work-tasks',op,v,id);
+const t=cmd(u.supervisor,'adhoc-save',{name:'本日免执行事项',requirement:'提交成果',owner:'demo-worker',department:'仓储',date:'2026-10-19',time:'18:00',zone:'America/New_York',priority:'P1'}),ref={kind:'work',id:t.id};
+cmd(u.supervisor,'day-plan',{member:'demo-worker',date:'2026-10-19',ref,note:'安排本日处理'});
+const leave=run(C,d,u.employee,'admin','personnel',{category:'请假',title:'请假',subject:'demo-worker',project:'',start:'2026-10-19',end:'2026-10-19',hours:8,reason:'个人原因',approver:'lin',details:{}});run(C,d,u.supervisor,'admin','personnel-decide',{approve:true,note:'同意'},leave.id);
+cmd(u.supervisor,'absence-batch',{request:leave.id,refs:[ref],disposition:'exempt',reason:'免当天安排'});
+assert.equal(C.workExempt(d,ref,'demo-worker','2026-10-19'),true);assert.equal(d.workTasks.items.find(x=>x.id===t.id).status,'pending');assert.ok(!C.inbox(d,u.employee,'2026-10-19').some(r=>r.id===t.id));assert.ok(C.inbox(d,u.employee,'2026-10-20').some(r=>r.id===t.id));
+const snap=C.clone(d);assert.throws(()=>cmd(u.supervisor,'absence-batch',{request:leave.id,refs:[{kind:'work',id:'unknown'}],disposition:'exempt',reason:'无效'}));assert.deepEqual(d,snap);
+const r=run(C,d,u.employee,'finance-office','request',{title:'无项目申请',body:'用途',kind:'payment',amount:'100',currency:'USD',project:'',due:'2026-10-22',special:false,budget:''});const view=C.scoped(d,u.employee);assert.ok(view.oa.requests.some(x=>x.id===r.oaRequestId));assert.doesNotThrow(()=>C.inbox(view,u.employee,'2026-10-19'));
+console.log('PASS final review: HR preserves hidden membership, date-specific exemptions and atomic batch, no-project finance projection');

@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';import {fixture,run} from './verify-oa-upgrade-fixture.mjs';
+const {C,d,users:u}=fixture();
+assert.equal(C.workInstant('2026-10-18','09:00','Asia/Shanghai','reject'),'2026-10-18T01:00:00.000Z');
+assert.throws(()=>C.workInstant('2026-03-08','02:30','America/New_York','reject'),/不存在/);
+assert.throws(()=>C.workInstant('2026-11-01','01:30','America/New_York','reject'),/重复/);
+assert.equal(Date.parse(C.workInstant('2026-11-01','01:30','America/New_York','later'))-Date.parse(C.workInstant('2026-11-01','01:30','America/New_York','earlier')),3600000);
+run(C,d,u.supervisor,'work-calendar','calendar-save',{member:'demo-worker',mode:'shift',weekdays:[],start:'09:00',end:'18:00',zone:'Asia/Shanghai'});
+run(C,d,u.supervisor,'work-calendar','shift-save',{member:'demo-worker',date:'2026-10-18',start:'22:00',end:'06:00',overnight:true,choice:'reject'});
+const rows=C.workOccurrences(d,'demo-worker','2026-10-18','2026-10-18');assert.equal(rows.length,1);assert.equal(rows[0].workDate,'2026-10-18');assert.equal(Date.parse(rows[0].endAt)-Date.parse(rows[0].startAt),8*3600000);
+assert.equal(C.workOccurrences(d,'lin','2026-10-18','2026-10-18').length,0);
+assert.equal(C.workOccurrences(d,'lin','2026-10-19','2026-10-19').length,1);
+const before=C.clone(d);assert.throws(()=>run(C,d,u.employee,'work-calendar','calendar-save',{member:'lin'}));assert.deepEqual(d,before);
+console.log('PASS work calendar: fixed days, overnight shift, IANA DST gap/fold, permission');
