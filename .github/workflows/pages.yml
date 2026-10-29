@@ -3,45 +3,53 @@ name: Deploy OA to GitHub Pages
 on:
   push:
     branches: [main]
-    paths:
-      - 'ceo-workbench/index.html'
-      - '.github/workflows/pages.yml'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    if: github.ref == 'refs/heads/main'
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Build and verify
+        run: npm test
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-
-      - name: Prepare static site
-        shell: bash
-        run: |
-          test -s ceo-workbench/index.html
-          mkdir -p "$RUNNER_TEMP/pages"
-          cp ceo-workbench/index.html "$RUNNER_TEMP/pages/index.html"
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ${{ runner.temp }}/pages
 
       - name: Deploy to GitHub Pages
         id: deployment
